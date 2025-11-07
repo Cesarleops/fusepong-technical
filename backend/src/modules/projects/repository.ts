@@ -1,4 +1,4 @@
-import { DrizzleQueryError, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { projectsTable } from "../../db/schema/public.js";
 import { NewProject, Project } from "./types.js";

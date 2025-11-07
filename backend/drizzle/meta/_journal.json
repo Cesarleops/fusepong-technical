@@ -15,6 +15,13 @@
       "when": 1762463648157,
       "tag": "0001_woozy_misty_knight",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1762522065403,
+      "tag": "0002_last_ulik",
+      "breakpoints": true
     }
   ]
 }

@@ -1,18 +1,10 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { projectsTable } from "../../db/schema/public.js";
-import { NewProject, Project } from "./types.js";
+import { projectsTable, userStoriesTable } from "../../db/schema/public.js";
+import { Project } from "./types.js";
+import { NewUserStory } from "../user-stories/types.js";
 
 export class ProjectRepository {
-  static async findAll(): Promise<Project[]> {
-    try {
-      const result = await db.select().from(projectsTable);
-      return result;
-    } catch (e) {
-      throw e;
-    }
-  }
-
   static async findById(id: string): Promise<Project> {
     try {
       const result = await db
@@ -26,9 +18,9 @@ export class ProjectRepository {
     }
   }
 
-  static async create(data: NewProject) {
+  static async createProjectUserStory(data: NewUserStory) {
     try {
-      await db.insert(projectsTable).values(data);
+      await db.insert(userStoriesTable).values(data);
     } catch (e) {
       throw e;
     }

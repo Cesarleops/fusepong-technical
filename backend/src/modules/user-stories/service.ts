@@ -2,9 +2,17 @@ import { UserStoryRepository } from "./repository.js";
 import { NewUserStory } from "./types.js";
 
 export class UserStoryService {
-  static async create(data: NewUserStory) {
+  static async getUserStoryById(storyId: string) {
     try {
-      await UserStoryRepository.create(data);
+      const story = await UserStoryRepository.findById(storyId);
+      return story;
+    } catch (e) {
+      throw e;
+    }
+  }
+  static async createUserStoryTicket(data: NewUserStory) {
+    try {
+      await UserStoryRepository.createUserStoryTicket(data);
     } catch (e) {
       throw e;
     }

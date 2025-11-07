@@ -1,16 +1,16 @@
 import { Router } from "express";
 import {
-  createProject,
+  createProjectUserStory,
   getProjectById,
-  getProjects,
 } from "../modules/projects/controller.js";
 
 const projectsRouter = Router();
 
-projectsRouter.get("/", getProjects);
-
 projectsRouter.get("/:id", getProjectById);
 
-projectsRouter.post("/", createProject);
+//TODO: Decide endpoint usability
+// projectsRouter.get("/:projectId/stories");
+
+projectsRouter.post("/:projectId/stories", createProjectUserStory);
 
 export default projectsRouter;

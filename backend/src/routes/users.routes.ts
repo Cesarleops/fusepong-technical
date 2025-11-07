@@ -9,14 +9,14 @@ import {
 
 const usersRouter = Router();
 
-usersRouter.get("/user/companies", getUserCompanies);
+usersRouter.get("/companies", getUserCompanies);
 
-usersRouter.get("/user/projects", getUserProjects);
+usersRouter.get("/projects", getUserProjects);
 
-usersRouter.get("/user/tickets", getUserTickets);
+usersRouter.get("/tickets", getUserTickets);
 
-usersRouter.post("/user/companies", joinCompany);
+usersRouter.post("/companies", joinCompany);
 
-usersRouter.post("/user/projects", joinProject);
+usersRouter.post("/projects", joinProject);
 
 export default usersRouter;

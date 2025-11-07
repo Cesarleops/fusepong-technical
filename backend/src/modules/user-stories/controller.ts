@@ -1,14 +1,25 @@
 import { Request, Response } from "express";
 import { UserStoryService } from "./service.js";
 
-export async function createUserStory(req: Request, res: Response) {
+export async function getUserStoryById(req: Request, res: Response) {
+  const { id } = req.params;
+  try {
+    const ticket = UserStoryService.getUserStoryById(id);
+    return ticket;
+  } catch (e) {
+    return res.status(404).json({
+      message: "La historia de usuario no existe",
+    });
+  }
+}
+
+export async function createUserStoryTicket(req: Request, res: Response) {
   const data = req.body;
   try {
-    await UserStoryService.create(data);
-    return res.status(201).send();
+    await UserStoryService.createUserStoryTicket(data);
   } catch (e) {
     return res.status(400).json({
-      message: "No se puedo crear la historia de usuario",
+      message: "No se pudo crear el ticket",
     });
   }
 }

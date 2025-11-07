@@ -7,7 +7,7 @@ import usersRouter from "./users.routes.js";
 
 export const router = Router();
 
-router.use("/users", usersRouter);
+router.use("/user", usersRouter);
 router.use("/companies", companyRouter);
 router.use("/projects", projectsRouter);
 router.use("/user-stories", userStoriesRouter);

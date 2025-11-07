@@ -1,16 +1,7 @@
+import { NewUserStory } from "../user-stories/types.js";
 import { ProjectRepository } from "./repository.js";
-import { NewProject } from "./types.js";
 
 export class ProjectService {
-  static async getAllProjects() {
-    try {
-      const projects = await ProjectRepository.findAll();
-      return projects;
-    } catch (e) {
-      throw e;
-    }
-  }
-
   static async getProjectById(id: string) {
     try {
       if (!id) throw new Error("ID IS REQUIRED");
@@ -21,9 +12,9 @@ export class ProjectService {
     }
   }
 
-  static async create(data: NewProject) {
+  static async createProjectUserStory(data: NewUserStory) {
     try {
-      await ProjectRepository.create(data);
+      await ProjectRepository.createProjectUserStory(data);
     } catch (e) {
       throw e;
     }

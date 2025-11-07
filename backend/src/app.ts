@@ -1,12 +1,20 @@
 import { router } from "./routes/index.js";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth.js";
-
 import express, { json } from "express";
+import cors from "cors";
 
 const BASE_ROUTE = "/api";
 
 export const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", //TODO: move frontend url to .env
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  }),
+);
 
 app.all("/api/auth/{*any}", toNodeHandler(auth));
 

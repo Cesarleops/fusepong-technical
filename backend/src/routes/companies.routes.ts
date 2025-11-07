@@ -3,10 +3,11 @@ import {
   createCompany,
   getCompanies,
 } from "../modules/companies/controller.js";
+import { authMiddleware } from "../middlewares/auth.js";
 
 const companyRouter = Router();
 
-companyRouter.get("/", getCompanies);
+companyRouter.get("/", authMiddleware, getCompanies);
 
 companyRouter.post("/", createCompany);
 

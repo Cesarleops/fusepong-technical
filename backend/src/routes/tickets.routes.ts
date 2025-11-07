@@ -7,6 +7,8 @@ import {
   updateTicket,
 } from "../modules/tickets/controller.js";
 
+//TODO: Think about deleting this routes since tickets are only accessed
+// from  projects at the moment (and the user can see its own tickets)
 const ticketsRouter = Router();
 
 ticketsRouter.get("/", getTickets);

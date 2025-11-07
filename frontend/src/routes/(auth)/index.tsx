@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LoginForm } from "../../features/auth/components/login-form";
+import { SignInForm } from "../../features/auth/components/sign-in-form";
 
 export const Route = createFileRoute("/(auth)/")({
   component: Index,
@@ -7,8 +7,10 @@ export const Route = createFileRoute("/(auth)/")({
 
 function Index() {
   return (
-    <div className="p-2">
-      <LoginForm />
-    </div>
+    <section className="flex justify-center items-center h-full w-full">
+      <main className="lg:w-[30%] lg:h-[45%] mx-auto p-4">
+        <SignInForm />
+      </main>
+    </section>
   );
 }

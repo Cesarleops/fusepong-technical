@@ -1,12 +1,14 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { SignOutButton } from "@/features/auth/components/sign-out-button";
 import { Link } from "@tanstack/react-router";
 import { BuildingIcon, HomeIcon, type LucideIcon } from "lucide-react";
 
@@ -46,6 +48,9 @@ export const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        <SidebarFooter>
+          <SignOutButton />
+        </SidebarFooter>
       </SidebarContent>
     </Sidebar>
   );

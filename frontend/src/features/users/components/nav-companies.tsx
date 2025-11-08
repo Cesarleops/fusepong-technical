@@ -5,6 +5,7 @@ import {
   SidebarMenuSkeleton,
 } from "@/components/ui/sidebar";
 import { useGetUserCompanies } from "../api/get-user-companies";
+import { Link } from "@tanstack/react-router";
 
 export const NavCompanies = () => {
   const { data, isLoading } = useGetUserCompanies();
@@ -30,9 +31,9 @@ export const NavCompanies = () => {
       {data.map(({ companies }) => (
         <SidebarMenuItem key={companies.name}>
           <SidebarMenuButton asChild>
-            <a>
+            <Link to={`/dashboard/${companies.id}/projects`}>
               <span>{companies.name}</span>
-            </a>
+            </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}

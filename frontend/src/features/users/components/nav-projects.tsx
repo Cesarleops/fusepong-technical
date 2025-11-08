@@ -31,7 +31,7 @@ export const NavProjects = () => {
       {data.map(({ projects }) => (
         <SidebarMenuItem key={projects.name}>
           <SidebarMenuButton asChild>
-            <Link to={`/dashboard/${projects.id}`}>
+            <Link to={`/dashboard/projects/${projects.id}`}>
               <span>{projects.name}</span>
             </Link>
           </SidebarMenuButton>

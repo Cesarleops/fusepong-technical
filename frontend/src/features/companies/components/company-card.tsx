@@ -1,11 +1,27 @@
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import type { Company } from "../types";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useJoinCompany } from "../api/join-company";
 
 interface Props {
   company: Company;
 }
 export const CompanyCard = ({ company }: Props) => {
+  const joinCompany = useJoinCompany();
+  const navigate = useNavigate();
+  const handleJoinCompany = () => {
+    joinCompany.mutate(company.id, {
+      onSuccess: () => {
+        navigate({
+          to: `/dashboard/${company.id}/projects`,
+        });
+      },
+      onError: (data) => {
+        toast.error(data.message);
+      },
+    });
+  };
   return (
     <article className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:bg-gray-50">
       <div className="flex items-center justify-between">
@@ -18,9 +34,12 @@ export const CompanyCard = ({ company }: Props) => {
         <p className="text-gray-600 truncate">{company.address}</p>
       </div>
       <footer className="w-full flex justify-end">
-        <Link to={`/dashboard/${company.id}/projects/all`}>
-          <Button>Ver proyectos</Button>
-        </Link>
+        <Button
+          disabled={joinCompany.isPending}
+          onClick={() => handleJoinCompany()}
+        >
+          Unirme
+        </Button>
       </footer>
     </article>
   );

@@ -14,6 +14,35 @@ export class CompanyRepository {
     }
   }
 
+  static async findCompanyById(
+    companyId: string,
+  ): Promise<Company & { projects: Project[] }> {
+    try {
+      const rows = await db
+        .select()
+        .from(companiesTable)
+        .where(eq(companiesTable.id, companyId))
+        .leftJoin(
+          projectsTable,
+          eq(projectsTable.companyId, companiesTable.id),
+        );
+
+      const company = rows[0].companies;
+
+      const projects = rows
+        .map((row) => row.projects)
+        .filter((project): project is Project => project !== null);
+
+      const result = {
+        ...company,
+        projects,
+      };
+      return result;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static async findCompanyProjects(companyId: string): Promise<Project[]> {
     try {
       const result = await db

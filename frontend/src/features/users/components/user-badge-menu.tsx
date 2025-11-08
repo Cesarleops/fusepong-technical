@@ -49,7 +49,7 @@ export const UserBadgeMenu = () => {
           >
             <DropdownMenuLabel>Menu</DropdownMenuLabel>
             <DropdownMenuItem>
-              <SignOutButton />
+              <SignOutButton className="w-full" />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

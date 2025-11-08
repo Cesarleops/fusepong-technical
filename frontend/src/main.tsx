@@ -8,6 +8,7 @@ import { routeTree } from "./routeTree.gen";
 import "./index.css";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "./components/ui/sonner";
 // Create a new router instance
 const router = createRouter({ routeTree });
 
@@ -29,6 +30,7 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <SidebarProvider>
           <RouterProvider router={router} />
+          <Toaster />
         </SidebarProvider>
       </QueryClientProvider>
     </StrictMode>,

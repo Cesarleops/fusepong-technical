@@ -16,8 +16,6 @@ export const UserStoryCard = ({ userStory }: Props) => {
 
   return (
     <div className="flex items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:bg-gray-50">
-      <div className="h-12 w-1 bg-gray-300 rounded-full shrink-0" />
-
       <div className="flex-1 min-w-0">
         <h3 className="font-semibold text-gray-900 truncate">
           {userStory.name}

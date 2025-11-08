@@ -14,13 +14,10 @@ import { Route as authSignupRouteImport } from './routes/(auth)/signup'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 import { Route as appDashboardHomeIndexRouteImport } from './routes/(app)/dashboard/home/index'
 import { Route as appDashboardCompaniesIndexRouteImport } from './routes/(app)/dashboard/companies/index'
-import { Route as appDashboardProjectIdIndexRouteImport } from './routes/(app)/dashboard/$projectId/index'
-import { Route as appDashboardProjectsAllIndexRouteImport } from './routes/(app)/dashboard/projects/all/index'
-import { Route as appDashboardCompanyIdProjectsAllIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/all/index'
-import { Route as appDashboardCompanyIdProjectsProjectIdIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/$projectId/index'
-import { Route as appDashboardCompanyIdProjectsProjectIdStoriesIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/$projectId/stories/index'
-import { Route as appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/index'
-import { Route as appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId/index'
+import { Route as appDashboardProjectsProjectIdIndexRouteImport } from './routes/(app)/dashboard/projects/$projectId/index'
+import { Route as appDashboardCompanyIdProjectsIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/index'
+import { Route as appDashboardProjectsProjectIdStoriesTicketsIndexRouteImport } from './routes/(app)/dashboard/projects/$projectId/stories/tickets/index'
+import { Route as appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport } from './routes/(app)/dashboard/projects/$projectId/stories/tickets/$ticketId/index'
 
 const authIndexRoute = authIndexRouteImport.update({
   id: '/(auth)/',
@@ -48,93 +45,64 @@ const appDashboardCompaniesIndexRoute =
     path: '/companies/',
     getParentRoute: () => appDashboardRoute,
   } as any)
-const appDashboardProjectIdIndexRoute =
-  appDashboardProjectIdIndexRouteImport.update({
-    id: '/$projectId/',
-    path: '/$projectId/',
+const appDashboardProjectsProjectIdIndexRoute =
+  appDashboardProjectsProjectIdIndexRouteImport.update({
+    id: '/projects/$projectId/',
+    path: '/projects/$projectId/',
     getParentRoute: () => appDashboardRoute,
   } as any)
-const appDashboardProjectsAllIndexRoute =
-  appDashboardProjectsAllIndexRouteImport.update({
-    id: '/projects/all/',
-    path: '/projects/all/',
+const appDashboardCompanyIdProjectsIndexRoute =
+  appDashboardCompanyIdProjectsIndexRouteImport.update({
+    id: '/$companyId/projects/',
+    path: '/$companyId/projects/',
     getParentRoute: () => appDashboardRoute,
   } as any)
-const appDashboardCompanyIdProjectsAllIndexRoute =
-  appDashboardCompanyIdProjectsAllIndexRouteImport.update({
-    id: '/$companyId/projects/all/',
-    path: '/$companyId/projects/all/',
+const appDashboardProjectsProjectIdStoriesTicketsIndexRoute =
+  appDashboardProjectsProjectIdStoriesTicketsIndexRouteImport.update({
+    id: '/projects/$projectId/stories/tickets/',
+    path: '/projects/$projectId/stories/tickets/',
     getParentRoute: () => appDashboardRoute,
   } as any)
-const appDashboardCompanyIdProjectsProjectIdIndexRoute =
-  appDashboardCompanyIdProjectsProjectIdIndexRouteImport.update({
-    id: '/$companyId/projects/$projectId/',
-    path: '/$companyId/projects/$projectId/',
+const appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute =
+  appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport.update({
+    id: '/projects/$projectId/stories/tickets/$ticketId/',
+    path: '/projects/$projectId/stories/tickets/$ticketId/',
     getParentRoute: () => appDashboardRoute,
   } as any)
-const appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute =
-  appDashboardCompanyIdProjectsProjectIdStoriesIndexRouteImport.update({
-    id: '/$companyId/projects/$projectId/stories/',
-    path: '/$companyId/projects/$projectId/stories/',
-    getParentRoute: () => appDashboardRoute,
-  } as any)
-const appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute =
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRouteImport.update({
-    id: '/$companyId/projects/$projectId/stories/tickets/',
-    path: '/$companyId/projects/$projectId/stories/tickets/',
-    getParentRoute: () => appDashboardRoute,
-  } as any)
-const appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute =
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport.update(
-    {
-      id: '/$companyId/projects/$projectId/stories/tickets/$ticketId/',
-      path: '/$companyId/projects/$projectId/stories/tickets/$ticketId/',
-      getParentRoute: () => appDashboardRoute,
-    } as any,
-  )
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof appDashboardRouteWithChildren
   '/signup': typeof authSignupRoute
   '/': typeof authIndexRoute
-  '/dashboard/$projectId': typeof appDashboardProjectIdIndexRoute
   '/dashboard/companies': typeof appDashboardCompaniesIndexRoute
   '/dashboard/home': typeof appDashboardHomeIndexRoute
-  '/dashboard/projects/all': typeof appDashboardProjectsAllIndexRoute
-  '/dashboard/$companyId/projects/$projectId': typeof appDashboardCompanyIdProjectsProjectIdIndexRoute
-  '/dashboard/$companyId/projects/all': typeof appDashboardCompanyIdProjectsAllIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories': typeof appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories/tickets': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute
+  '/dashboard/$companyId/projects': typeof appDashboardCompanyIdProjectsIndexRoute
+  '/dashboard/projects/$projectId': typeof appDashboardProjectsProjectIdIndexRoute
+  '/dashboard/projects/$projectId/stories/tickets': typeof appDashboardProjectsProjectIdStoriesTicketsIndexRoute
+  '/dashboard/projects/$projectId/stories/tickets/$ticketId': typeof appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/dashboard': typeof appDashboardRouteWithChildren
   '/signup': typeof authSignupRoute
   '/': typeof authIndexRoute
-  '/dashboard/$projectId': typeof appDashboardProjectIdIndexRoute
   '/dashboard/companies': typeof appDashboardCompaniesIndexRoute
   '/dashboard/home': typeof appDashboardHomeIndexRoute
-  '/dashboard/projects/all': typeof appDashboardProjectsAllIndexRoute
-  '/dashboard/$companyId/projects/$projectId': typeof appDashboardCompanyIdProjectsProjectIdIndexRoute
-  '/dashboard/$companyId/projects/all': typeof appDashboardCompanyIdProjectsAllIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories': typeof appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories/tickets': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute
-  '/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute
+  '/dashboard/$companyId/projects': typeof appDashboardCompanyIdProjectsIndexRoute
+  '/dashboard/projects/$projectId': typeof appDashboardProjectsProjectIdIndexRoute
+  '/dashboard/projects/$projectId/stories/tickets': typeof appDashboardProjectsProjectIdStoriesTicketsIndexRoute
+  '/dashboard/projects/$projectId/stories/tickets/$ticketId': typeof appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)/dashboard': typeof appDashboardRouteWithChildren
   '/(auth)/signup': typeof authSignupRoute
   '/(auth)/': typeof authIndexRoute
-  '/(app)/dashboard/$projectId/': typeof appDashboardProjectIdIndexRoute
   '/(app)/dashboard/companies/': typeof appDashboardCompaniesIndexRoute
   '/(app)/dashboard/home/': typeof appDashboardHomeIndexRoute
-  '/(app)/dashboard/projects/all/': typeof appDashboardProjectsAllIndexRoute
-  '/(app)/dashboard/$companyId/projects/$projectId/': typeof appDashboardCompanyIdProjectsProjectIdIndexRoute
-  '/(app)/dashboard/$companyId/projects/all/': typeof appDashboardCompanyIdProjectsAllIndexRoute
-  '/(app)/dashboard/$companyId/projects/$projectId/stories/': typeof appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute
-  '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute
-  '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId/': typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute
+  '/(app)/dashboard/$companyId/projects/': typeof appDashboardCompanyIdProjectsIndexRoute
+  '/(app)/dashboard/projects/$projectId/': typeof appDashboardProjectsProjectIdIndexRoute
+  '/(app)/dashboard/projects/$projectId/stories/tickets/': typeof appDashboardProjectsProjectIdStoriesTicketsIndexRoute
+  '/(app)/dashboard/projects/$projectId/stories/tickets/$ticketId/': typeof appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,43 +110,34 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/signup'
     | '/'
-    | '/dashboard/$projectId'
     | '/dashboard/companies'
     | '/dashboard/home'
-    | '/dashboard/projects/all'
-    | '/dashboard/$companyId/projects/$projectId'
-    | '/dashboard/$companyId/projects/all'
-    | '/dashboard/$companyId/projects/$projectId/stories'
-    | '/dashboard/$companyId/projects/$projectId/stories/tickets'
-    | '/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId'
+    | '/dashboard/$companyId/projects'
+    | '/dashboard/projects/$projectId'
+    | '/dashboard/projects/$projectId/stories/tickets'
+    | '/dashboard/projects/$projectId/stories/tickets/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
     | '/signup'
     | '/'
-    | '/dashboard/$projectId'
     | '/dashboard/companies'
     | '/dashboard/home'
-    | '/dashboard/projects/all'
-    | '/dashboard/$companyId/projects/$projectId'
-    | '/dashboard/$companyId/projects/all'
-    | '/dashboard/$companyId/projects/$projectId/stories'
-    | '/dashboard/$companyId/projects/$projectId/stories/tickets'
-    | '/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId'
+    | '/dashboard/$companyId/projects'
+    | '/dashboard/projects/$projectId'
+    | '/dashboard/projects/$projectId/stories/tickets'
+    | '/dashboard/projects/$projectId/stories/tickets/$ticketId'
   id:
     | '__root__'
     | '/(app)/dashboard'
     | '/(auth)/signup'
     | '/(auth)/'
-    | '/(app)/dashboard/$projectId/'
     | '/(app)/dashboard/companies/'
     | '/(app)/dashboard/home/'
-    | '/(app)/dashboard/projects/all/'
-    | '/(app)/dashboard/$companyId/projects/$projectId/'
-    | '/(app)/dashboard/$companyId/projects/all/'
-    | '/(app)/dashboard/$companyId/projects/$projectId/stories/'
-    | '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/'
-    | '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId/'
+    | '/(app)/dashboard/$companyId/projects/'
+    | '/(app)/dashboard/projects/$projectId/'
+    | '/(app)/dashboard/projects/$projectId/stories/tickets/'
+    | '/(app)/dashboard/projects/$projectId/stories/tickets/$ticketId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -224,85 +183,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardCompaniesIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
-    '/(app)/dashboard/$projectId/': {
-      id: '/(app)/dashboard/$projectId/'
-      path: '/$projectId'
-      fullPath: '/dashboard/$projectId'
-      preLoaderRoute: typeof appDashboardProjectIdIndexRouteImport
+    '/(app)/dashboard/projects/$projectId/': {
+      id: '/(app)/dashboard/projects/$projectId/'
+      path: '/projects/$projectId'
+      fullPath: '/dashboard/projects/$projectId'
+      preLoaderRoute: typeof appDashboardProjectsProjectIdIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
-    '/(app)/dashboard/projects/all/': {
-      id: '/(app)/dashboard/projects/all/'
-      path: '/projects/all'
-      fullPath: '/dashboard/projects/all'
-      preLoaderRoute: typeof appDashboardProjectsAllIndexRouteImport
+    '/(app)/dashboard/$companyId/projects/': {
+      id: '/(app)/dashboard/$companyId/projects/'
+      path: '/$companyId/projects'
+      fullPath: '/dashboard/$companyId/projects'
+      preLoaderRoute: typeof appDashboardCompanyIdProjectsIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
-    '/(app)/dashboard/$companyId/projects/all/': {
-      id: '/(app)/dashboard/$companyId/projects/all/'
-      path: '/$companyId/projects/all'
-      fullPath: '/dashboard/$companyId/projects/all'
-      preLoaderRoute: typeof appDashboardCompanyIdProjectsAllIndexRouteImport
+    '/(app)/dashboard/projects/$projectId/stories/tickets/': {
+      id: '/(app)/dashboard/projects/$projectId/stories/tickets/'
+      path: '/projects/$projectId/stories/tickets'
+      fullPath: '/dashboard/projects/$projectId/stories/tickets'
+      preLoaderRoute: typeof appDashboardProjectsProjectIdStoriesTicketsIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
-    '/(app)/dashboard/$companyId/projects/$projectId/': {
-      id: '/(app)/dashboard/$companyId/projects/$projectId/'
-      path: '/$companyId/projects/$projectId'
-      fullPath: '/dashboard/$companyId/projects/$projectId'
-      preLoaderRoute: typeof appDashboardCompanyIdProjectsProjectIdIndexRouteImport
-      parentRoute: typeof appDashboardRoute
-    }
-    '/(app)/dashboard/$companyId/projects/$projectId/stories/': {
-      id: '/(app)/dashboard/$companyId/projects/$projectId/stories/'
-      path: '/$companyId/projects/$projectId/stories'
-      fullPath: '/dashboard/$companyId/projects/$projectId/stories'
-      preLoaderRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesIndexRouteImport
-      parentRoute: typeof appDashboardRoute
-    }
-    '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/': {
-      id: '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/'
-      path: '/$companyId/projects/$projectId/stories/tickets'
-      fullPath: '/dashboard/$companyId/projects/$projectId/stories/tickets'
-      preLoaderRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRouteImport
-      parentRoute: typeof appDashboardRoute
-    }
-    '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId/': {
-      id: '/(app)/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId/'
-      path: '/$companyId/projects/$projectId/stories/tickets/$ticketId'
-      fullPath: '/dashboard/$companyId/projects/$projectId/stories/tickets/$ticketId'
-      preLoaderRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport
+    '/(app)/dashboard/projects/$projectId/stories/tickets/$ticketId/': {
+      id: '/(app)/dashboard/projects/$projectId/stories/tickets/$ticketId/'
+      path: '/projects/$projectId/stories/tickets/$ticketId'
+      fullPath: '/dashboard/projects/$projectId/stories/tickets/$ticketId'
+      preLoaderRoute: typeof appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
   }
 }
 
 interface appDashboardRouteChildren {
-  appDashboardProjectIdIndexRoute: typeof appDashboardProjectIdIndexRoute
   appDashboardCompaniesIndexRoute: typeof appDashboardCompaniesIndexRoute
   appDashboardHomeIndexRoute: typeof appDashboardHomeIndexRoute
-  appDashboardProjectsAllIndexRoute: typeof appDashboardProjectsAllIndexRoute
-  appDashboardCompanyIdProjectsProjectIdIndexRoute: typeof appDashboardCompanyIdProjectsProjectIdIndexRoute
-  appDashboardCompanyIdProjectsAllIndexRoute: typeof appDashboardCompanyIdProjectsAllIndexRoute
-  appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute: typeof appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute
+  appDashboardCompanyIdProjectsIndexRoute: typeof appDashboardCompanyIdProjectsIndexRoute
+  appDashboardProjectsProjectIdIndexRoute: typeof appDashboardProjectsProjectIdIndexRoute
+  appDashboardProjectsProjectIdStoriesTicketsIndexRoute: typeof appDashboardProjectsProjectIdStoriesTicketsIndexRoute
+  appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute: typeof appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute
 }
 
 const appDashboardRouteChildren: appDashboardRouteChildren = {
-  appDashboardProjectIdIndexRoute: appDashboardProjectIdIndexRoute,
   appDashboardCompaniesIndexRoute: appDashboardCompaniesIndexRoute,
   appDashboardHomeIndexRoute: appDashboardHomeIndexRoute,
-  appDashboardProjectsAllIndexRoute: appDashboardProjectsAllIndexRoute,
-  appDashboardCompanyIdProjectsProjectIdIndexRoute:
-    appDashboardCompanyIdProjectsProjectIdIndexRoute,
-  appDashboardCompanyIdProjectsAllIndexRoute:
-    appDashboardCompanyIdProjectsAllIndexRoute,
-  appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute:
-    appDashboardCompanyIdProjectsProjectIdStoriesIndexRoute,
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute:
-    appDashboardCompanyIdProjectsProjectIdStoriesTicketsIndexRoute,
-  appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute:
-    appDashboardCompanyIdProjectsProjectIdStoriesTicketsTicketIdIndexRoute,
+  appDashboardCompanyIdProjectsIndexRoute:
+    appDashboardCompanyIdProjectsIndexRoute,
+  appDashboardProjectsProjectIdIndexRoute:
+    appDashboardProjectsProjectIdIndexRoute,
+  appDashboardProjectsProjectIdStoriesTicketsIndexRoute:
+    appDashboardProjectsProjectIdStoriesTicketsIndexRoute,
+  appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute:
+    appDashboardProjectsProjectIdStoriesTicketsTicketIdIndexRoute,
 }
 
 const appDashboardRouteWithChildren = appDashboardRoute._addFileChildren(

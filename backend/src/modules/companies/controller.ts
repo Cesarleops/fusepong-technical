@@ -2,13 +2,24 @@ import { Request, Response } from "express";
 import { CompanyService } from "./service.js";
 
 export async function getCompanies(_req: Request, res: Response) {
-  console.log("getting companies");
   try {
     const companies = await CompanyService.getAllCompanies();
     return res.status(200).json(companies);
   } catch (e) {
     return res.status(500).json({
       message: "No pudimos obtener las compañias.",
+    });
+  }
+}
+
+export async function getCompanyById(req: Request, res: Response) {
+  const { id } = req.params;
+  try {
+    const company = await CompanyService.getCompanyById(id);
+    return res.status(200).json(company);
+  } catch (e) {
+    return res.status(404).json({
+      message: "No pudimos obtener la compañia.",
     });
   }
 }

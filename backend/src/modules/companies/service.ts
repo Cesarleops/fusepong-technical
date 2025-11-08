@@ -12,6 +12,15 @@ export class CompanyService {
     }
   }
 
+  static async getCompanyById(companyId: string) {
+    try {
+      const companies = await CompanyRepository.findCompanyById(companyId);
+      return companies;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static async getCompanyProjects(companyId: string) {
     try {
       const projects = await CompanyRepository.findCompanyProjects(companyId);

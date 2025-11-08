@@ -33,9 +33,13 @@ export async function getUserTickets(req: Request, res: Response) {
 }
 
 export async function joinCompany(req: Request, res: Response) {
-  const { companyId } = req.body;
+  const { id } = req.params;
+  console.log("company id", id);
   try {
-    await UserService.joinCompany(req.user.id, companyId);
+    await UserService.joinCompany(req.user.id, id);
+    return res.status(201).json({
+      message: "Te uniste exitosamente",
+    });
   } catch (e) {
     return res.status(400).json({
       message: "Los datos del proyecto son incorrectos",
@@ -44,9 +48,12 @@ export async function joinCompany(req: Request, res: Response) {
 }
 
 export async function joinProject(req: Request, res: Response) {
-  const { projectId } = req.body;
+  const { id } = req.params;
   try {
-    await UserService.joinProject(req.user.id, projectId);
+    await UserService.joinProject(req.user.id, id);
+    return res.status(201).json({
+      message: "Te uniste exitosamente",
+    });
   } catch (e) {
     return res.status(400).json({
       message: "Los datos del proyecto son incorrectos",

@@ -27,6 +27,7 @@ export class UserService {
   }
 
   static async joinCompany(userId: string, companyId: string) {
+    console.log("userid", userId);
     try {
       await UserRepository.joinCompany(userId, companyId);
     } catch (e) {

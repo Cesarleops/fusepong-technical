@@ -18,8 +18,8 @@ usersRouter.get("/projects", getUserProjects);
 
 usersRouter.get("/tickets", getUserTickets);
 
-usersRouter.post("/companies", joinCompany);
+usersRouter.post("/companies/:id", joinCompany);
 
-usersRouter.post("/projects", joinProject);
+usersRouter.post("/projects/:id", joinProject);
 
 export default usersRouter;

@@ -62,6 +62,7 @@ export class UserRepository {
         companyId,
       });
     } catch (e) {
+      console.log("err", e);
       throw e;
     }
   }

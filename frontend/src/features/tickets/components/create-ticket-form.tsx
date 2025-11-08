@@ -38,7 +38,6 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
     };
     const validateFields = CreateTicketSchema.safeParse(ticketData);
     if (!validateFields.success) {
-      console.log("error", validateFields.error.flatten().fieldErrors);
       toast.error("algo salio mal creando tu ticket");
       return;
     }
@@ -48,9 +47,10 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
   return (
     <TicketForm
       ticket={ticket}
+      isUpdating={false}
+      triggerText="Crear ticket"
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}
-      triggerText="Crear ticket"
     />
   );
 };

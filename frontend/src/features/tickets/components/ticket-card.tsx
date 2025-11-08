@@ -1,4 +1,5 @@
 import type { Ticket } from "../types";
+import { UpdateTicketForm } from "./update-ticket-form";
 
 interface Props {
   ticket: Ticket;
@@ -25,6 +26,7 @@ export const TicketCard = ({ ticket }: Props) => {
         </header>
 
         <p className="text-sm text-gray-600 truncate">{ticket.description}</p>
+        <UpdateTicketForm ticket={ticket} />
       </div>
     </div>
   );

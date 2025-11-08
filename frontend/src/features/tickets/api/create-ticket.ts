@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userStories } from "@/features/stories/query-keys";
 
 export const createTicket = async (data: CreateTicket) => {
-  console.log("creating", data);
   const response = await fetch(`${API_URL}/user-stories/tickets`, {
     method: "POST",
     headers: {

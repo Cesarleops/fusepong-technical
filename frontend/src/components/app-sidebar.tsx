@@ -12,7 +12,8 @@ import {
 import { NavCompanies } from "@/features/users/components/nav-companies";
 import { NavProjects } from "@/features/users/components/nav-projects";
 import { UserBadgeMenu } from "@/features/users/components/user-badge-menu";
-import { Link } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
+import { Link, useLocation } from "@tanstack/react-router";
 import { BuildingIcon, HomeIcon, type LucideIcon } from "lucide-react";
 
 const items: {
@@ -32,6 +33,8 @@ const items: {
   },
 ];
 export const AppSidebar = () => {
+  const location = useLocation();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -43,7 +46,12 @@ export const AppSidebar = () => {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    className={cn("font-medium", {
+                      "text-primary": location.pathname === item.url,
+                    })}
+                    asChild
+                  >
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -57,13 +65,13 @@ export const AppSidebar = () => {
         <SidebarGroup>
           <SidebarGroupLabel>Mis compañias</SidebarGroupLabel>
           <SidebarGroupContent>
-            <NavCompanies />
+            <NavCompanies location={location.pathname} />
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Proyectos</SidebarGroupLabel>
           <SidebarGroupContent>
-            <NavProjects />
+            <NavProjects location={location.pathname} />
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

@@ -6,8 +6,12 @@ import {
 } from "@/components/ui/sidebar";
 import { useGetUserCompanies } from "../api/get-user-companies";
 import { Link } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
 
-export const NavCompanies = () => {
+interface Props {
+  location: string;
+}
+export const NavCompanies = ({ location }: Props) => {
   const { data, isLoading } = useGetUserCompanies();
 
   if (isLoading) {
@@ -30,7 +34,13 @@ export const NavCompanies = () => {
     <SidebarMenu>
       {data.map(({ companies }) => (
         <SidebarMenuItem key={companies.name}>
-          <SidebarMenuButton asChild>
+          <SidebarMenuButton
+            className={cn("font-medium", {
+              "text-primary":
+                location === `/dashboard/${companies.id}/projects`,
+            })}
+            asChild
+          >
             <Link to={`/dashboard/${companies.id}/projects`}>
               <span>{companies.name}</span>
             </Link>

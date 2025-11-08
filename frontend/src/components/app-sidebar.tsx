@@ -27,7 +27,7 @@ const items: {
     icon: HomeIcon,
   },
   {
-    title: "Compañias",
+    title: "Ver compañias",
     url: "/dashboard/companies",
     icon: BuildingIcon,
   },
@@ -63,13 +63,17 @@ export const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Mis compañias</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-semibold">
+            Mis compañias
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <NavCompanies location={location.pathname} />
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Proyectos</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-semibold">
+            Mis proyectos
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <NavProjects location={location.pathname} />
           </SidebarGroupContent>

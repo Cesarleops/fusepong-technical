@@ -18,24 +18,13 @@ import { CreateUserStorySchema } from "../schemas";
 import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
 import { CreateTicketSchema } from "@/features/tickets/schemas";
+import { LoaderIcon } from "lucide-react";
 import type { CreateTicket } from "@/features/tickets/types";
-
-interface FormElements extends HTMLFormControlsCollection {
-  name: HTMLInputElement;
-  description: HTMLTextAreaElement;
-  ticketName: HTMLInputElement;
-  ticketDescription: HTMLTextAreaElement;
-}
-
-interface UserStoryFormElement extends HTMLFormElement {
-  readonly elements: FormElements;
-}
 
 interface Props {
   projectId: string;
 }
 
-//TODO: FIX CONTINUAR BUTTON CAUSING THE SUBMIIIT
 export const CreateUserStoryForm = ({ projectId }: Props) => {
   const { data } = useSession();
 
@@ -44,6 +33,8 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [userStory, setUserStory] = useState({
     name: "",
@@ -55,8 +46,11 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
     description: "",
   });
 
-  const handleSubmit = (e: FormEvent<UserStoryFormElement>) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    setIsSubmitting(true);
+
     const userStoryData = {
       ...userStory,
       projectId,
@@ -74,16 +68,24 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
     }).safeParse(ticketData);
 
     if (!validateTicketFields.success) {
-      console.log("errors", validateTicketFields.error.flatten().fieldErrors);
+      setIsSubmitting(false);
       toast.error("Por favor verifica los datos del ticket");
       return;
     }
 
-    createUserStory.mutate(userStoryData, {
-      onSuccess: (data) => {
-        createTicket.mutate({ ...ticketData, userStoryId: data });
-      },
-    });
+    try {
+      const userStoryId = await createUserStory.mutateAsync(userStoryData);
+      await createTicket.mutateAsync({ ...ticketData, userStoryId });
+      setOpen(false);
+    } catch (e) {
+      let message = "No se pudo crear la historia";
+      if (e instanceof Error) {
+        message = e.message;
+      }
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleNextStep = () => {
@@ -116,7 +118,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
             Una historia describe una tarea de un proyecto
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
+        <form>
           {step === 1 && (
             <div>
               <fieldset>
@@ -197,7 +199,19 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
                   Continuar
                 </Button>
               ) : (
-                <Button type="submit">Crear</Button>
+                <Button
+                  disabled={isSubmitting}
+                  onClick={handleSubmit}
+                  type="button"
+                >
+                  {isSubmitting ? (
+                    <span>
+                      <LoaderIcon className="animate-spin" />
+                    </span>
+                  ) : (
+                    "Crear"
+                  )}
+                </Button>
               )}
             </div>
           </DialogFooter>

@@ -48,8 +48,7 @@ export const UpdateTicketForm = ({ ticket }: Props) => {
     const validateFields = UpdateTicketSchema.safeParse(dataToUpdate);
 
     if (!validateFields.success) {
-      console.log("error", validateFields.error.flatten().fieldErrors);
-      toast.error("Something went wrong updating your ticket");
+      toast.error("Verifica los datos del ticket");
       return;
     }
 
@@ -76,7 +75,6 @@ export const UpdateTicketForm = ({ ticket }: Props) => {
       setOpen={setOpen}
       ticket={ticketForm}
       isLoadingAction={updateTicket.isPending}
-      triggerText="Actualizar"
       handleStatusChange={handleStatusChange}
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}

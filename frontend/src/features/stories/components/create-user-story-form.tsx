@@ -61,8 +61,6 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
       authorId: data?.user.id as string,
     };
 
-    console.log("ticket data", ticketData);
-
     const validateTicketFields = CreateTicketSchema.omit({
       userStoryId: true,
     }).safeParse(ticketData);
@@ -120,9 +118,11 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
         </DialogHeader>
         <form>
           {step === 1 && (
-            <div>
+            <div className="space-y-4">
               <fieldset>
-                <label htmlFor="name">Historia</label>
+                <label htmlFor="name" className="font-medium">
+                  Historia
+                </label>
                 <Input
                   id="name"
                   name="name"
@@ -135,9 +135,11 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
                 />
               </fieldset>
               <fieldset>
-                <label htmlFor="description">
-                  Descripción{" "}
-                  <span className="text-muted-foreground">Opcional</span>
+                <label htmlFor="description" className="font-medium">
+                  Descripción
+                  <span className="text-muted-foreground text-xs ml-2">
+                    Opcional
+                  </span>
                 </label>
                 <Textarea
                   value={userStory.description}
@@ -151,9 +153,11 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
             </div>
           )}
           {step === 2 && (
-            <div>
+            <div className="space-y-4">
               <fieldset>
-                <label htmlFor="ticketName">Primer ticket</label>
+                <label htmlFor="ticketName " className="font-medium">
+                  Primer ticket
+                </label>
                 <Input
                   id="ticketName"
                   name="ticketName"
@@ -166,9 +170,11 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
                 />
               </fieldset>
               <fieldset>
-                <label htmlFor="ticketDescription">
+                <label htmlFor="ticketDescription" className="font-medium">
                   Describe el ticket
-                  <span className="text-muted-foreground">Opcional</span>
+                  <span className="text-muted-foreground ml-2 text-xs">
+                    Opcional
+                  </span>
                 </label>
                 <Textarea
                   id="ticketDescription"
@@ -185,10 +191,16 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
             <div className="w-full flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <DialogClose asChild>
-                  <Button type="button">Cancelar</Button>
+                  <Button type="button" variant={"secondary"}>
+                    Cancelar
+                  </Button>
                 </DialogClose>
                 {step === 2 && (
-                  <Button type="button" onClick={() => handlePrevStep()}>
+                  <Button
+                    type="button"
+                    variant={"outline"}
+                    onClick={() => handlePrevStep()}
+                  >
                     Volver
                   </Button>
                 )}

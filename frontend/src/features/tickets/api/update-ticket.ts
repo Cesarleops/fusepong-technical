@@ -2,6 +2,7 @@ import { API_URL } from "@/config/api";
 import type { UpdateTicket } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userStories } from "@/features/stories/query-keys";
+import { users } from "@/features/users/query-keys";
 
 export const updateTicket = async (ticketId: string, data: UpdateTicket) => {
   const response = await fetch(`${API_URL}/tickets/${ticketId}`, {
@@ -32,6 +33,9 @@ export function useUpdateTicket(userStoryId: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: userStories.detail(userStoryId).queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: users.listTickets.queryKey,
       });
     },
   });

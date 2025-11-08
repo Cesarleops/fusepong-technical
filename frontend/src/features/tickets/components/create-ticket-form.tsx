@@ -62,7 +62,6 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
       openForm={open}
       isLoadingAction={createTicket.isPending}
       setOpen={setOpen}
-      triggerText="Crear ticket"
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}
     />

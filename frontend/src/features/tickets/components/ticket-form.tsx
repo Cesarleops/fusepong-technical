@@ -18,17 +18,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { LoaderIcon } from "lucide-react";
+import { LoaderIcon, PencilIcon } from "lucide-react";
 import type { ChangeEvent, FormEvent } from "react";
 import type { Ticket } from "../types";
 
 interface Props {
   ticket: {
     name: string;
-    description: string;
+    description?: string;
     status?: Ticket["status"];
   };
-  triggerText: string;
   isLoadingAction: boolean;
   openForm: boolean;
   setOpen: (v: boolean) => void;
@@ -46,8 +45,8 @@ const STATUS_OPTIONS = [
   { value: "completed", label: "Completado" },
   { value: "cancelled", label: "Cancelado" },
 ];
+
 export const TicketForm = ({
-  triggerText,
   ticket,
   isUpdating,
   isLoadingAction,
@@ -60,7 +59,13 @@ export const TicketForm = ({
   return (
     <Dialog open={openForm} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{triggerText}</Button>
+        {isUpdating ? (
+          <Button>
+            <PencilIcon />
+          </Button>
+        ) : (
+          <Button>Nuevo ticket</Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

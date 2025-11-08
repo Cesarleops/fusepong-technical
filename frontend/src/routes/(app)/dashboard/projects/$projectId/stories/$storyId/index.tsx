@@ -25,7 +25,7 @@ function RouteComponent() {
       <header className="mb-8">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">{data?.name}</h3>
-          <CreateTicketForm />
+          <CreateTicketForm userStoryId={storyId} />
         </div>
         <p className="text-foreground">Tickets</p>
       </header>

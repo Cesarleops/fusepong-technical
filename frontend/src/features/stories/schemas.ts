@@ -1,8 +1,8 @@
 import z from "zod";
 
 export const CreateUserStorySchema = z.object({
-  name: z.string(),
-  projectId: z.uuid(),
+  name: z.string().nonempty(),
+  projectId: z.uuid().nonempty(),
   description: z.string().optional(),
 });
 

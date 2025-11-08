@@ -1,5 +1,5 @@
-export const API_URL = "http://localhost:3000/api";
+export const API_URL = import.meta.env.VITE_API_URL;
 
-export const FRONTEND_URL = "http://localhost:5173" as const;
+export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL;
 
-export const BACKEND_URL = "http://localhost:3000" as const;
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

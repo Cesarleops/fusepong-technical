@@ -1,3 +1,4 @@
+import "dotenv";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../db/index.js";
@@ -8,7 +9,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  trustedOrigins: ["http://localhost:5173", "http://localhost:3000"], //TODO: Move urls to .env
+  trustedOrigins: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,

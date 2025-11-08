@@ -10,7 +10,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", //TODO: move frontend url to .env
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),

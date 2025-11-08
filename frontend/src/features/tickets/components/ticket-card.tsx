@@ -1,6 +1,7 @@
 import { formatDate } from "@/lib/utils";
 import type { Ticket } from "../types";
 import { UpdateTicketForm } from "./update-ticket-form";
+import { CreateTicketCommentForm } from "./create-ticket-comment-form";
 
 interface Props {
   ticket: Ticket;
@@ -18,9 +19,13 @@ export const TicketCard = ({ ticket }: Props) => {
   return (
     <div className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex-1 min-w-0">
-        <p className="font-light text-sm text-foreground">
-          Creado {formattedDate}
-        </p>
+        <div className="flex justify-between">
+          <p className="font-light text-sm text-foreground">
+            Creado {formattedDate}
+          </p>
+          <UpdateTicketForm ticket={ticket} />
+        </div>
+
         <header className="w-full flex justify-between items-center">
           <h3 className="font-semibold text-gray-900 truncate">
             {ticket.name}
@@ -31,8 +36,12 @@ export const TicketCard = ({ ticket }: Props) => {
         </header>
 
         <p className="text-sm text-gray-600 truncate">{ticket.description}</p>
-        <footer className="flex justify-end mt-2">
-          <UpdateTicketForm ticket={ticket} />
+
+        <footer className="mt-4">
+          <CreateTicketCommentForm
+            ticketId={ticket.id}
+            userStoryId={ticket.userStoryId}
+          />
         </footer>
       </div>
     </div>

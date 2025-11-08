@@ -1,11 +1,19 @@
 import { TicketRepository } from "./repository.js";
-import { NewTicket } from "./types.js";
+import { NewTicket, NewTicketComment } from "./types.js";
 
 export class TicketService {
   static async getTicketById(ticketId: string) {
     try {
       const ticket = await TicketRepository.findById(ticketId);
       return ticket;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static async createTicketComment(data: NewTicketComment) {
+    try {
+      await TicketRepository.createTicketComment(data);
     } catch (e) {
       throw e;
     }

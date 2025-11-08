@@ -13,6 +13,20 @@ export async function getTicketById(req: Request, res: Response) {
   }
 }
 
+export async function createTicketComment(req: Request, res: Response) {
+  const data = req.body;
+  try {
+    await TicketService.createTicketComment(data);
+    return res.status(201).json({
+      message: "Se añadió el comentario",
+    });
+  } catch (e) {
+    return res.status(400).json({
+      message: "No se pudo añadir el comentario",
+    });
+  }
+}
+
 export async function updateTicket(req: Request, res: Response) {
   const data = req.body;
   const { id } = req.params;

@@ -7,4 +7,10 @@ export const CreateTicketSchema = z.object({
   description: z.string().optional(),
 });
 
+export const CreateTicketCommentSchema = z.object({
+  ticketId: z.uuid(),
+  authorId: z.string().nonempty(),
+  comment: z.string().nonempty().max(255),
+});
+
 export const UpdateTicketSchema = CreateTicketSchema.partial();

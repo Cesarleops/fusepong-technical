@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { ticketsTable } from "../../db/schema/public.js";
-import { NewTicket, Ticket } from "./types.js";
+import { ticketComments, ticketsTable } from "../../db/schema/public.js";
+import { NewTicket, NewTicketComment, Ticket } from "./types.js";
 
 export class TicketRepository {
   static async findById(ticketId: string): Promise<Ticket> {
@@ -22,6 +22,14 @@ export class TicketRepository {
         .update(ticketsTable)
         .set(data)
         .where(eq(ticketsTable.id, ticketId));
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static async createTicketComment(data: NewTicketComment) {
+    try {
+      await db.insert(ticketComments).values(data);
     } catch (e) {
       throw e;
     }

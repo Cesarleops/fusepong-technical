@@ -16,7 +16,7 @@ const statusMap = {
 export const TicketCard = ({ ticket }: Props) => {
   const formattedDate = formatDate(ticket.created_at);
   return (
-    <div className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-gray-50">
+    <div className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex-1 min-w-0">
         <p className="font-light text-sm text-foreground">
           Creado {formattedDate}

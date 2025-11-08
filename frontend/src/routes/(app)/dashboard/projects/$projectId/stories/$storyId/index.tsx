@@ -24,14 +24,18 @@ function RouteComponent() {
     <section>
       <header className="mb-8">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold">{data?.name}</h3>
+          <h3 className="text-xl font-semibold">
+            Historia de usuario /{data?.name}
+          </h3>
           <CreateTicketForm userStoryId={storyId} />
         </div>
-        <p className="text-foreground">Tickets</p>
+        <p className="text-foreground">Lista de tickets</p>
       </header>
-      {data?.tickets.map((ticket) => (
-        <TicketCard key={ticket.id} ticket={ticket} />
-      ))}
+      <div className="max-w-3xl mx-auto flex flex-col gap-2">
+        {data?.tickets.map((ticket) => (
+          <TicketCard key={ticket.id} ticket={ticket} />
+        ))}
+      </div>
     </section>
   );
 }

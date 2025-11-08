@@ -14,7 +14,7 @@ export const createTicket = async (data: CreateTicket) => {
   });
 
   if (!response.ok) {
-    throw new Error("SOmething bad happened");
+    throw new Error("Something bad happened");
   }
 };
 

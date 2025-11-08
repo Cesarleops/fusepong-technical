@@ -10,4 +10,6 @@ export type Ticket = CreateTicket &
     status: "cancelled" | "completed" | "in_progress" | "active";
   };
 
-export type UpdateTicket = z.infer<typeof UpdateTicketSchema>;
+export type UpdateTicket = z.infer<typeof UpdateTicketSchema> & {
+  status: "cancelled" | "completed" | "in_progress" | "active";
+};

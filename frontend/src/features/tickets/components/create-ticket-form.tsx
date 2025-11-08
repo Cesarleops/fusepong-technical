@@ -11,6 +11,8 @@ interface Props {
 export const CreateTicketForm = ({ userStoryId }: Props) => {
   const { data } = useSession();
 
+  const [open, setOpen] = useState(false);
+
   const [ticket, setTicket] = useState({
     name: "",
     description: "",
@@ -41,13 +43,25 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
       toast.error("algo salio mal creando tu ticket");
       return;
     }
-    createTicket.mutate(ticketData);
+
+    createTicket.mutate(ticketData, {
+      onSuccess: () => {
+        setTicket({
+          name: "",
+          description: "",
+        });
+        setOpen(false);
+      },
+    });
   };
 
   return (
     <TicketForm
       ticket={ticket}
       isUpdating={false}
+      openForm={open}
+      isLoadingAction={createTicket.isPending}
+      setOpen={setOpen}
       triggerText="Crear ticket"
       handleInputChange={handleInputChange}
       handleSubmit={handleSubmit}

@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { TicketForm } from "./ticket-form";
 import { UpdateTicketSchema } from "../schemas";
 import { toast } from "sonner";
+import { useUpdateTicket } from "../api/update-ticket";
 import type { Ticket } from "../types";
 
 interface Props {
@@ -11,8 +12,12 @@ export const UpdateTicketForm = ({ ticket }: Props) => {
   const [ticketForm, setTicketForm] = useState(() => ({
     name: ticket.name,
     description: ticket.description,
-    status: ticket.status,
+    status: ticket.status as Ticket["status"],
   }));
+
+  const [open, setOpen] = useState(false);
+
+  const updateTicket = useUpdateTicket(ticket.userStoryId);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -37,7 +42,6 @@ export const UpdateTicketForm = ({ ticket }: Props) => {
     e.preventDefault();
 
     const dataToUpdate = {
-      id: ticket.id,
       ...ticketForm,
     };
 
@@ -48,11 +52,30 @@ export const UpdateTicketForm = ({ ticket }: Props) => {
       toast.error("Something went wrong updating your ticket");
       return;
     }
+
+    updateTicket.mutate(
+      {
+        ticketId: ticket.id,
+        data: dataToUpdate,
+      },
+      {
+        onSuccess: () => {
+          setOpen(false);
+          toast.success("Tu ticket fue actualizado");
+        },
+        onError: (err) => {
+          toast.error(err.message);
+        },
+      },
+    );
   };
   return (
     <TicketForm
       isUpdating={true}
+      openForm={open}
+      setOpen={setOpen}
       ticket={ticketForm}
+      isLoadingAction={updateTicket.isPending}
       triggerText="Actualizar"
       handleStatusChange={handleStatusChange}
       handleInputChange={handleInputChange}

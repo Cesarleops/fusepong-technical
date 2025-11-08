@@ -7,6 +7,4 @@ export const CreateTicketSchema = z.object({
   description: z.string().optional(),
 });
 
-export const UpdateTicketSchema = CreateTicketSchema.partial().extend({
-  id: z.uuid(),
-});
+export const UpdateTicketSchema = CreateTicketSchema.partial();

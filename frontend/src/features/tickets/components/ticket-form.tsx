@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { LoaderIcon } from "lucide-react";
 import type { ChangeEvent, FormEvent } from "react";
 import type { Ticket } from "../types";
 
@@ -28,6 +29,9 @@ interface Props {
     status?: Ticket["status"];
   };
   triggerText: string;
+  isLoadingAction: boolean;
+  openForm: boolean;
+  setOpen: (v: boolean) => void;
   isUpdating: boolean;
   handleSubmit: (e: FormEvent) => void;
   handleInputChange: (
@@ -40,22 +44,23 @@ const STATUS_OPTIONS = [
   { value: "active", label: "Activo" },
   { value: "in_progress", label: "En proceso" },
   { value: "completed", label: "Completado" },
-  { value: "canceled", label: "Cancelado" },
+  { value: "cancelled", label: "Cancelado" },
 ];
 export const TicketForm = ({
   triggerText,
   ticket,
   isUpdating,
+  isLoadingAction,
+  openForm,
+  setOpen,
   handleInputChange,
   handleStatusChange,
   handleSubmit,
 }: Props) => {
   return (
-    <Dialog>
+    <Dialog open={openForm} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={isUpdating ? "outline" : "default"}>
-          {triggerText}
-        </Button>
+        <Button>{triggerText}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -67,36 +72,10 @@ export const TicketForm = ({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="name" className="text-right">
-              Ticket
-            </label>
-            <Input
-              id="name"
-              name="name"
-              value={ticket.name}
-              onChange={handleInputChange}
-              className="col-span-3"
-              autoComplete="off"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="description" className="text-right">
-              Descripción
-            </label>
-            <Textarea
-              id="description"
-              name="description"
-              value={ticket.description}
-              onChange={handleInputChange}
-              className="col-span-3"
-            />
-          </div>
-
+        <form onSubmit={handleSubmit} className="space-y-4">
           {isUpdating && (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="status" className="text-right">
+            <div>
+              <label htmlFor="status" className="sr-only text-right">
                 Status
               </label>
               <Select
@@ -104,7 +83,7 @@ export const TicketForm = ({
                 value={ticket.status}
                 onValueChange={handleStatusChange}
               >
-                <SelectTrigger className="col-span-3">
+                <SelectTrigger className="ml-auto">
                   <SelectValue placeholder="Selecciona el estado del ticket" />
                 </SelectTrigger>
                 <SelectContent>
@@ -117,14 +96,49 @@ export const TicketForm = ({
               </Select>
             </div>
           )}
+          <div className="space-y-2">
+            <label htmlFor="name" className="font-medium text-right">
+              Ticket
+            </label>
+            <Input
+              id="name"
+              name="name"
+              value={ticket.name}
+              onChange={handleInputChange}
+              placeholder="Nombre del ticket"
+              autoComplete="off"
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="description" className="font-medium text-right">
+              Descripción
+            </label>
+            <Textarea
+              id="description"
+              name="description"
+              value={ticket.description}
+              onChange={handleInputChange}
+              placeholder="Describe tu ticket"
+            />
+          </div>
 
           <DialogFooter className="mt-4">
             <DialogClose asChild>
               <Button type="button" variant="outline">
-                Cancel
+                Cancelar
               </Button>
             </DialogClose>
-            <Button type="submit">{isUpdating ? "Confirmar" : "Crear"}</Button>
+            <Button type="submit" className="w-20" disabled={isLoadingAction}>
+              {isLoadingAction ? (
+                <span>
+                  <LoaderIcon className="animate-spin" />
+                </span>
+              ) : isUpdating ? (
+                "Confirmar"
+              ) : (
+                "Crear"
+              )}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

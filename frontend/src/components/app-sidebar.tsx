@@ -1,17 +1,17 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { SignOutButton } from "@/features/auth/components/sign-out-button";
 import { NavCompanies } from "@/features/users/components/nav-companies";
 import { NavProjects } from "@/features/users/components/nav-projects";
+import { UserBadgeMenu } from "@/features/users/components/user-badge-menu";
 import { Link } from "@tanstack/react-router";
 import { BuildingIcon, HomeIcon, type LucideIcon } from "lucide-react";
 
@@ -34,6 +34,9 @@ const items: {
 export const AppSidebar = () => {
   return (
     <Sidebar>
+      <SidebarHeader>
+        <UserBadgeMenu />
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -63,9 +66,6 @@ export const AppSidebar = () => {
             <NavProjects />
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarFooter>
-          <SignOutButton />
-        </SidebarFooter>
       </SidebarContent>
     </Sidebar>
   );

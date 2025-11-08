@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "@tanstack/react-router";
 import { signOut } from "../api/sign-out";
+import { LogOutIcon } from "lucide-react";
 
 export const SignOutButton = () => {
   const navigate = useNavigate();
@@ -14,5 +15,12 @@ export const SignOutButton = () => {
       console.log("err", e);
     }
   };
-  return <Button onClick={() => handleSignOut()}>Cerrar sesión</Button>;
+  return (
+    <Button variant={"ghost"} onClick={() => handleSignOut()}>
+      Cerrar sesión
+      <span>
+        <LogOutIcon className="stroke-primary" />
+      </span>
+    </Button>
+  );
 };

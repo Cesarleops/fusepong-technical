@@ -7,7 +7,9 @@ import type { Project } from "@/features/projects/types";
 export const getCompany = async (
   companyId: string,
 ): Promise<Company & { projects: Project[] }> => {
-  const response = await fetch(`${API_URL}/companies/${companyId}`);
+  const response = await fetch(`${API_URL}/companies/${companyId}`, {
+    credentials: "include",
+  });
   const data = await response.json();
   return data;
 };

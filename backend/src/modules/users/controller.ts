@@ -40,8 +40,12 @@ export async function joinCompany(req: Request, res: Response) {
       message: "Te uniste exitosamente",
     });
   } catch (e) {
+    let message = "Algo salió mal al unirte a la compañia";
+    if (e instanceof Error) {
+      message = e.message;
+    }
     return res.status(400).json({
-      message: "Los datos del proyecto son incorrectos",
+      message,
     });
   }
 }
@@ -54,8 +58,12 @@ export async function joinProject(req: Request, res: Response) {
       message: "Te uniste exitosamente",
     });
   } catch (e) {
+    let message = "Algo salió mal al unirte al rpoyecto";
+    if (e instanceof Error) {
+      message = e.message;
+    }
     return res.status(400).json({
-      message: "Los datos del proyecto son incorrectos",
+      message,
     });
   }
 }

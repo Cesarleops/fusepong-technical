@@ -8,7 +8,7 @@ export abstract class AppError extends Error {
   }
 }
 
-export class DatabaseError extends AppError {
+export class AppDatabaseError extends AppError {
   statusCode: number = 500;
   code: string = "DATABASE_ERROR";
 
@@ -17,7 +17,7 @@ export class DatabaseError extends AppError {
   }
 }
 
-export class ValidationError extends AppError {
+export class BusinessValidationError extends AppError {
   statusCode = 400;
   code = "VALIDATION_ERROR";
 

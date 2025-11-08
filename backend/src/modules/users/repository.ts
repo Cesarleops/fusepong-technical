@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { DrizzleQueryError, eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import {
   userCompaniesTable,
@@ -8,6 +8,8 @@ import {
   companiesTable,
   ticketsTable,
 } from "../../db/schema/public.js";
+import { NeonDbError } from "@neondatabase/serverless";
+import { AppDatabaseError } from "../../lib/errors.js";
 
 export class UserRepository {
   static async findProjects(userId: string) {
@@ -62,7 +64,9 @@ export class UserRepository {
         companyId,
       });
     } catch (e) {
-      console.log("err", e);
+      if (e?.cause && "code" in e.cause && e.cause.code === "23505") {
+        throw new AppDatabaseError("Ya eres miembro de la compañia");
+      }
       throw e;
     }
   }
@@ -74,6 +78,9 @@ export class UserRepository {
         userId,
       });
     } catch (e) {
+      if (e?.cause && "code" in e.cause && e.cause.code === "23505") {
+        throw new AppDatabaseError("Ya eres miembro del proyecto");
+      }
       throw e;
     }
   }

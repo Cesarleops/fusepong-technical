@@ -1,4 +1,11 @@
-import { pgEnum, pgTable, uuid, varchar, text } from "drizzle-orm/pg-core";
+import {
+  pgEnum,
+  pgTable,
+  uuid,
+  varchar,
+  text,
+  unique,
+} from "drizzle-orm/pg-core";
 import { users } from "./auth.js";
 import { timestamps } from "./columns.helpers.js";
 
@@ -15,20 +22,26 @@ export const companiesTable = pgTable("companies", {
   ...timestamps,
 });
 
-export const userCompaniesTable = pgTable("user_companies", {
-  id: uuid().primaryKey().defaultRandom(),
-  companyId: uuid("company_id")
-    .references(() => companiesTable.id, {
-      onDelete: "cascade",
-    })
-    .notNull(),
-  userId: text("user_id")
-    .references(() => users.id, {
-      onDelete: "cascade",
-    })
-    .notNull(),
-  ...timestamps,
-});
+export const userCompaniesTable = pgTable(
+  "user_companies",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    companyId: uuid("company_id")
+      .references(() => companiesTable.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
+    userId: text("user_id")
+      .references(() => users.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
+    ...timestamps,
+  },
+  (table) => ({
+    userCompanyUnique: unique().on(table.companyId, table.userId),
+  }),
+);
 
 export const projectsTable = pgTable("projects", {
   id: uuid().primaryKey().defaultRandom(),
@@ -42,20 +55,26 @@ export const projectsTable = pgTable("projects", {
   ...timestamps,
 });
 
-export const userProjectsTable = pgTable("user_projects", {
-  id: uuid().primaryKey().defaultRandom(),
-  projectId: uuid("project_id")
-    .references(() => projectsTable.id, {
-      onDelete: "cascade",
-    })
-    .notNull(),
-  userId: text("user_id")
-    .references(() => users.id, {
-      onDelete: "cascade",
-    })
-    .notNull(),
-  ...timestamps,
-});
+export const userProjectsTable = pgTable(
+  "user_projects",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    projectId: uuid("project_id")
+      .references(() => projectsTable.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
+    userId: text("user_id")
+      .references(() => users.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
+    ...timestamps,
+  },
+  (table) => ({
+    userProjectUnique: unique().on(table.projectId, table.userId),
+  }),
+);
 
 export const userStoriesTable = pgTable("user_stories", {
   id: uuid().primaryKey().defaultRandom(),

@@ -5,7 +5,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const joinCompany = async (companyId: string) => {
   const response = await fetch(`${API_URL}/user/companies/${companyId}`, {
     method: "POST",
-
     credentials: "include",
   });
 

@@ -1,4 +1,4 @@
-import { DrizzleQueryError, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import {
   userCompaniesTable,
@@ -8,7 +8,6 @@ import {
   companiesTable,
   ticketsTable,
 } from "../../db/schema/public.js";
-import { NeonDbError } from "@neondatabase/serverless";
 import { AppDatabaseError } from "../../lib/errors.js";
 
 export class UserRepository {

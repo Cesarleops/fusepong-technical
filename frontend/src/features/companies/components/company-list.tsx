@@ -16,7 +16,7 @@ export const CompanyList = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {data?.map((company) => (
-        <CompanyCard company={company} />
+        <CompanyCard key={company.id} company={company} />
       ))}
     </div>
   );

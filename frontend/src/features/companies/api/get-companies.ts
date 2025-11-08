@@ -4,7 +4,7 @@ import { companies } from "../query-keys";
 import type { Company } from "../types";
 
 const getCompanies = async (): Promise<Company[]> => {
-  const response = await fetch(`${API_URL}/api/companies`);
+  const response = await fetch(`${API_URL}/companies`);
   const data = await response.json();
   return data;
 };

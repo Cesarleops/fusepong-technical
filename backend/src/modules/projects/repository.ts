@@ -10,9 +10,13 @@ export class ProjectRepository {
       const result = await db
         .select()
         .from(projectsTable)
-        .where(eq(projectsTable.id, id));
+        .where(eq(projectsTable.id, id))
+        .innerJoin(
+          userStoriesTable,
+          eq(userStoriesTable.projectId, projectsTable.id),
+        );
 
-      return result[0];
+      return result;
     } catch (e) {
       throw e;
     }

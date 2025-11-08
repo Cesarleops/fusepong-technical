@@ -4,7 +4,7 @@ import { API_URL } from "@/config/api";
 import type { UserCompanies } from "../types";
 
 export const getUserCompanies = async (): Promise<UserCompanies[]> => {
-  const response = await fetch(`${API_URL}/api/user/companies`, {
+  const response = await fetch(`${API_URL}/user/companies`, {
     credentials: "include",
   });
   const data = await response.json();

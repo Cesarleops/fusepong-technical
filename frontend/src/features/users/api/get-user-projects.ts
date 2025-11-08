@@ -4,7 +4,9 @@ import { API_URL } from "@/config/api";
 import type { UserProjects } from "../types";
 
 export const getUserProjects = async (): Promise<UserProjects[]> => {
-  const response = await fetch(`${API_URL}/api/user/projects`);
+  const response = await fetch(`${API_URL}/user/projects`, {
+    credentials: "include",
+  });
   const data = await response.json();
   return data;
 };

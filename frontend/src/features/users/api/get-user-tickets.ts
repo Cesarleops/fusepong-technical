@@ -4,7 +4,9 @@ import { API_URL } from "@/config/api";
 import type { UserTickets } from "../types";
 
 export const getUserTickets = async (): Promise<UserTickets[]> => {
-  const response = await fetch(`${API_URL}/api/user/tickets`);
+  const response = await fetch(`${API_URL}/user/tickets`, {
+    credentials: "include",
+  });
   const data = await response.json();
   console.log("d", data);
   return data;

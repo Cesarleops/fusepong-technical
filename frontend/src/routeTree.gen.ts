@@ -14,6 +14,7 @@ import { Route as authSignupRouteImport } from './routes/(auth)/signup'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 import { Route as appDashboardHomeIndexRouteImport } from './routes/(app)/dashboard/home/index'
 import { Route as appDashboardCompaniesIndexRouteImport } from './routes/(app)/dashboard/companies/index'
+import { Route as appDashboardProjectIdIndexRouteImport } from './routes/(app)/dashboard/$projectId/index'
 import { Route as appDashboardProjectsAllIndexRouteImport } from './routes/(app)/dashboard/projects/all/index'
 import { Route as appDashboardCompanyIdProjectsAllIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/all/index'
 import { Route as appDashboardCompanyIdProjectsProjectIdIndexRouteImport } from './routes/(app)/dashboard/$companyId/projects/$projectId/index'
@@ -45,6 +46,12 @@ const appDashboardCompaniesIndexRoute =
   appDashboardCompaniesIndexRouteImport.update({
     id: '/companies/',
     path: '/companies/',
+    getParentRoute: () => appDashboardRoute,
+  } as any)
+const appDashboardProjectIdIndexRoute =
+  appDashboardProjectIdIndexRouteImport.update({
+    id: '/$projectId/',
+    path: '/$projectId/',
     getParentRoute: () => appDashboardRoute,
   } as any)
 const appDashboardProjectsAllIndexRoute =
@@ -90,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof appDashboardRouteWithChildren
   '/signup': typeof authSignupRoute
   '/': typeof authIndexRoute
+  '/dashboard/$projectId': typeof appDashboardProjectIdIndexRoute
   '/dashboard/companies': typeof appDashboardCompaniesIndexRoute
   '/dashboard/home': typeof appDashboardHomeIndexRoute
   '/dashboard/projects/all': typeof appDashboardProjectsAllIndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof appDashboardRouteWithChildren
   '/signup': typeof authSignupRoute
   '/': typeof authIndexRoute
+  '/dashboard/$projectId': typeof appDashboardProjectIdIndexRoute
   '/dashboard/companies': typeof appDashboardCompaniesIndexRoute
   '/dashboard/home': typeof appDashboardHomeIndexRoute
   '/dashboard/projects/all': typeof appDashboardProjectsAllIndexRoute
@@ -117,6 +126,7 @@ export interface FileRoutesById {
   '/(app)/dashboard': typeof appDashboardRouteWithChildren
   '/(auth)/signup': typeof authSignupRoute
   '/(auth)/': typeof authIndexRoute
+  '/(app)/dashboard/$projectId/': typeof appDashboardProjectIdIndexRoute
   '/(app)/dashboard/companies/': typeof appDashboardCompaniesIndexRoute
   '/(app)/dashboard/home/': typeof appDashboardHomeIndexRoute
   '/(app)/dashboard/projects/all/': typeof appDashboardProjectsAllIndexRoute
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/signup'
     | '/'
+    | '/dashboard/$projectId'
     | '/dashboard/companies'
     | '/dashboard/home'
     | '/dashboard/projects/all'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/signup'
     | '/'
+    | '/dashboard/$projectId'
     | '/dashboard/companies'
     | '/dashboard/home'
     | '/dashboard/projects/all'
@@ -158,6 +170,7 @@ export interface FileRouteTypes {
     | '/(app)/dashboard'
     | '/(auth)/signup'
     | '/(auth)/'
+    | '/(app)/dashboard/$projectId/'
     | '/(app)/dashboard/companies/'
     | '/(app)/dashboard/home/'
     | '/(app)/dashboard/projects/all/'
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardCompaniesIndexRouteImport
       parentRoute: typeof appDashboardRoute
     }
+    '/(app)/dashboard/$projectId/': {
+      id: '/(app)/dashboard/$projectId/'
+      path: '/$projectId'
+      fullPath: '/dashboard/$projectId'
+      preLoaderRoute: typeof appDashboardProjectIdIndexRouteImport
+      parentRoute: typeof appDashboardRoute
+    }
     '/(app)/dashboard/projects/all/': {
       id: '/(app)/dashboard/projects/all/'
       path: '/projects/all'
@@ -257,6 +277,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface appDashboardRouteChildren {
+  appDashboardProjectIdIndexRoute: typeof appDashboardProjectIdIndexRoute
   appDashboardCompaniesIndexRoute: typeof appDashboardCompaniesIndexRoute
   appDashboardHomeIndexRoute: typeof appDashboardHomeIndexRoute
   appDashboardProjectsAllIndexRoute: typeof appDashboardProjectsAllIndexRoute
@@ -268,6 +289,7 @@ interface appDashboardRouteChildren {
 }
 
 const appDashboardRouteChildren: appDashboardRouteChildren = {
+  appDashboardProjectIdIndexRoute: appDashboardProjectIdIndexRoute,
   appDashboardCompaniesIndexRoute: appDashboardCompaniesIndexRoute,
   appDashboardHomeIndexRoute: appDashboardHomeIndexRoute,
   appDashboardProjectsAllIndexRoute: appDashboardProjectsAllIndexRoute,

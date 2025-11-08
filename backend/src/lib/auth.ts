@@ -9,7 +9,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  trustedOrigins: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  trustedOrigins: [
+    "https://fusepong-technical.vercel.app",
+    "https://fusepong-technical-backend.onrender.com",
+  ],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,

@@ -19,4 +19,10 @@ export const auth = betterAuth({
     schema,
     usePlural: true,
   }),
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: ".onrender.com",
+    },
+  },
 });

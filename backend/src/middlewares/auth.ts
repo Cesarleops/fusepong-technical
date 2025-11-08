@@ -6,6 +6,7 @@ export const requireAuth = async (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log("hea", req.headers);
   console.log("cookies", req.cookies);
   try {
     const session = await auth.api.getSession({

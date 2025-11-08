@@ -40,7 +40,12 @@ export const NavProjects = ({ location }: Props) => {
             })}
             asChild
           >
-            <Link to={`/dashboard/projects/${projects.id}`}>
+            <Link
+              to={`/dashboard/projects/$projectId`}
+              params={{
+                projectId: projects.id,
+              }}
+            >
               <span>{projects.name}</span>
             </Link>
           </SidebarMenuButton>

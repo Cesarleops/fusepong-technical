@@ -28,7 +28,11 @@ export const UserStoryCard = ({ userStory }: Props) => {
       <footer className="flex justify-end">
         <Button>
           <Link
-            to={`/dashboard/projects/${userStory.projectId}/stories/${userStory.id}`}
+            to={`/dashboard/projects/$projectId/stories/$storyId`}
+            params={{
+              projectId: userStory.projectId,
+              storyId: userStory.id,
+            }}
           >
             Ver historia
           </Link>

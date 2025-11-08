@@ -1,15 +1,17 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/(app)/dashboard/")({
+export const Route = createFileRoute("/(app)/dashboard")({
   component: AppLayout,
 });
 
 function AppLayout() {
   return (
-    <div>
+    <div className="flex">
       <AppSidebar />
-      <Outlet />
+      <main className="p-4 w-full">
+        <Outlet />
+      </main>
     </div>
   );
 }

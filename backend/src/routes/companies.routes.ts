@@ -6,9 +6,6 @@ import {
   getCompanyProjects,
 } from "../modules/companies/controller.js";
 
-//TODO: Add middleware
-//import { authMiddleware } from "../middlewares/auth.js";
-
 const companyRouter = Router();
 
 companyRouter.get("/", getCompanies);

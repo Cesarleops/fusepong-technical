@@ -7,6 +7,7 @@ import { routeTree } from "./routeTree.gen";
 
 import "./index.css";
 import { SidebarProvider } from "./components/ui/sidebar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Create a new router instance
 const router = createRouter({ routeTree });
 
@@ -17,15 +18,19 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const queryClient = new QueryClient();
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <SidebarProvider>
-        <RouterProvider router={router} />
-      </SidebarProvider>
+      <QueryClientProvider client={queryClient}>
+        <SidebarProvider>
+          <RouterProvider router={router} />
+        </SidebarProvider>
+      </QueryClientProvider>
     </StrictMode>,
   );
 }

@@ -4,17 +4,23 @@ import {
   userCompaniesTable,
   userProjectsTable,
   ticketAssignees,
+  projectsTable,
+  companiesTable,
+  ticketsTable,
 } from "../../db/schema/public.js";
 
-//TODO: ADD JOINS
 export class UserRepository {
   static async findProjects(userId: string) {
     try {
-      const projects = await db
+      const result = await db
         .select()
         .from(userProjectsTable)
-        .where(eq(userProjectsTable.userId, userId));
-      return projects;
+        .where(eq(userProjectsTable.userId, userId))
+        .innerJoin(
+          projectsTable,
+          eq(userProjectsTable.projectId, projectsTable.id),
+        );
+      return result;
     } catch (e) {
       throw e;
     }
@@ -22,11 +28,15 @@ export class UserRepository {
 
   static async findCompanies(userId: string) {
     try {
-      const companies = await db
+      const result = await db
         .select()
         .from(userCompaniesTable)
-        .where(eq(userCompaniesTable.userId, userId));
-      return companies;
+        .where(eq(userCompaniesTable.userId, userId))
+        .innerJoin(
+          companiesTable,
+          eq(userCompaniesTable.companyId, companiesTable.id),
+        );
+      return result;
     } catch (e) {
       throw e;
     }
@@ -34,11 +44,12 @@ export class UserRepository {
 
   static async findTickets(userId: string) {
     try {
-      const tickets = await db
+      const result = await db
         .select()
         .from(ticketAssignees)
-        .where(eq(ticketAssignees.userId, userId));
-      return tickets;
+        .where(eq(ticketAssignees.userId, userId))
+        .innerJoin(ticketsTable, eq(ticketAssignees.ticketId, ticketsTable.id));
+      return result;
     } catch (e) {
       throw e;
     }

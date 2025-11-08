@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import { UserService } from "./service.js";
+import { console } from "node:inspector/promises";
 
-//TODO: READ USER ID FROM THE Request
-export async function getUserCompanies(req: Request, res: Response) {
+export async function getUserCompanies(_req: Request, res: Response) {
+  console.log("getting here 2");
+
   try {
-    const companies = await UserService.getCompanies("");
+    const companies = await UserService.getCompanies(
+      "GMOfvhyVQAODBWscJxXtUoz2WmrVtkKt",
+    );
     return res.status(200).json(companies);
   } catch (e) {
     return res
@@ -13,9 +17,11 @@ export async function getUserCompanies(req: Request, res: Response) {
   }
 }
 
-export async function getUserProjects(req: Request, res: Response) {
+export async function getUserProjects(_req: Request, res: Response) {
   try {
-    const projects = await UserService.getProjects("");
+    const projects = await UserService.getProjects(
+      "GMOfvhyVQAODBWscJxXtUoz2WmrVtkKt",
+    );
     return res.status(200).json(projects);
   } catch (e) {
     return res
@@ -24,9 +30,11 @@ export async function getUserProjects(req: Request, res: Response) {
   }
 }
 
-export async function getUserTickets(req: Request, res: Response) {
+export async function getUserTickets(_req: Request, res: Response) {
   try {
-    const tickets = await UserService.getTickets("");
+    const tickets = await UserService.getTickets(
+      "GMOfvhyVQAODBWscJxXtUoz2WmrVtkKt",
+    );
     return res.status(200).json(tickets);
   } catch (e) {
     return res.status(500).json({ message: "No pudimos obtener tus tickets" });

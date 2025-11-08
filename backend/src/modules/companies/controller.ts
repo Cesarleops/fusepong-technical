@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CompanyService } from "./service.js";
 
 export async function getCompanies(_req: Request, res: Response) {
+  console.log("getting companies");
   try {
     const companies = await CompanyService.getAllCompanies();
     return res.status(200).json(companies);

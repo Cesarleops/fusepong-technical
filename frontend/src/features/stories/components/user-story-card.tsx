@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { UserStory } from "../types";
 
 interface Props {
@@ -30,6 +31,11 @@ export const UserStoryCard = ({ userStory }: Props) => {
           {formattedDate}
         </span>
       </div>
+      <Link
+        to={`/dashboard/projects/${userStory.projectId}/stories/${userStory.id}`}
+      >
+        Ver historia
+      </Link>
     </div>
   );
 };

@@ -4,4 +4,7 @@ export const userStories = createQueryKeys("userStories", {
   listStories: (projectId: string) => ({
     queryKey: [{ projectId }],
   }),
+  detail: (id: string) => ({
+    queryKey: [{ id }],
+  }),
 });

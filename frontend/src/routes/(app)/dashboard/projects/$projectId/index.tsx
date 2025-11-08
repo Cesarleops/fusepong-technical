@@ -1,4 +1,5 @@
 import { useGetProject } from "@/features/projects/api/get-project";
+import { CreateUserStoryForm } from "@/features/stories/components/create-story-form";
 import { UserStoryList } from "@/features/stories/components/user-story-list";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -11,7 +12,6 @@ function RouteComponent() {
 
   const { data, error, isLoading } = useGetProject(projectId);
 
-  console.log("p", data);
   if (isLoading) {
     return <div>loading</div>;
   }
@@ -22,7 +22,10 @@ function RouteComponent() {
   return (
     <section>
       <header className="mb-8">
-        <h3 className="text-xl font-semibold">{data?.name}</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-semibold">{data?.name}</h3>
+          <CreateUserStoryForm />
+        </div>
         <p className="text-foreground">Historias de usuario</p>
       </header>
       <UserStoryList userStories={data?.userStories || []} />

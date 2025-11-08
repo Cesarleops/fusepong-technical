@@ -1,5 +1,5 @@
 import { useGetProject } from "@/features/projects/api/get-project";
-import { CreateUserStoryForm } from "@/features/stories/components/create-story-form";
+import { CreateUserStoryForm } from "@/features/stories/components/create-user-story-form";
 import { UserStoryList } from "@/features/stories/components/user-story-list";
 import { createFileRoute } from "@tanstack/react-router";
 

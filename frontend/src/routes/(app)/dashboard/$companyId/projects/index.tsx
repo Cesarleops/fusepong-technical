@@ -9,7 +9,6 @@ export const Route = createFileRoute("/(app)/dashboard/$companyId/projects/")({
 function RouteComponent() {
   const { companyId } = Route.useParams();
   const { data, error, isLoading } = useGetCompany(companyId);
-  console.log("d", data);
   if (isLoading) {
     return <div>loading</div>;
   }
@@ -20,9 +19,9 @@ function RouteComponent() {
     <section className="w-full">
       <header className="mb-8">
         <h3 className="text-xl font-semibold">{data?.name}</h3>
-        <p className="text-foreground">{data?.nit}</p>
+        <p className="text-foreground text-sm">NIT {data?.nit}</p>
       </header>
-      <div>
+      <div className="max-w-3xl mx-auto">
         {data?.projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

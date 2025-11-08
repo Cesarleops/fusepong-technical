@@ -1,3 +1,4 @@
+import { formatDate } from "@/lib/utils";
 import type { Ticket } from "../types";
 import { UpdateTicketForm } from "./update-ticket-form";
 
@@ -13,9 +14,13 @@ const statusMap = {
 };
 
 export const TicketCard = ({ ticket }: Props) => {
+  const formattedDate = formatDate(ticket.created_at);
   return (
     <div className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-gray-50">
       <div className="flex-1 min-w-0">
+        <p className="font-light text-sm text-foreground">
+          Creado {formattedDate}
+        </p>
         <header className="w-full flex justify-between items-center">
           <h3 className="font-semibold text-gray-900 truncate">
             {ticket.name}
@@ -26,7 +31,9 @@ export const TicketCard = ({ ticket }: Props) => {
         </header>
 
         <p className="text-sm text-gray-600 truncate">{ticket.description}</p>
-        <UpdateTicketForm ticket={ticket} />
+        <footer className="flex justify-end mt-2">
+          <UpdateTicketForm ticket={ticket} />
+        </footer>
       </div>
     </div>
   );

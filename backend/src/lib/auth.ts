@@ -12,6 +12,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "https://fusepong-technical.vercel.app",
     "https://fusepong-technical-backend.onrender.com",
+    "http://localhost:5173",
   ],
   database: drizzleAdapter(db, {
     provider: "pg",

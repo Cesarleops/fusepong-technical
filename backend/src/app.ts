@@ -8,10 +8,10 @@ const BASE_ROUTE = "/api";
 
 export const app = express();
 
-console.log("ENV", process.env);
+console.log("ENV", process.env.FRONTEND_URL);
 app.use(
   cors({
-    origin: "https://fusepong-technical.vercel.app",
+    origin: ["https://fusepong-technical.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),

@@ -8,7 +8,6 @@ export const getUserTickets = async (): Promise<UserTickets[]> => {
     credentials: "include",
   });
   const data = await response.json();
-  console.log("d", data);
   return data;
 };
 

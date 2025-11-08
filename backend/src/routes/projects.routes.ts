@@ -8,6 +8,6 @@ const projectsRouter = Router();
 
 projectsRouter.get("/:id", getProjectById);
 
-projectsRouter.post("/:projectId/stories", createProjectUserStory);
+projectsRouter.post("/user-stories", createProjectUserStory);
 
 export default projectsRouter;

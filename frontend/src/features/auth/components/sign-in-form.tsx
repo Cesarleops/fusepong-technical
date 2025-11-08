@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { SignInSchema } from "../schemas";
 import { signIn } from "../api/sign-in";
+import { useState } from "react";
+import { LoaderCircleIcon } from "lucide-react";
+import { toast } from "sonner";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -16,9 +19,11 @@ interface SignInFormElement extends HTMLFormElement {
 
 export const SignInForm = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   async function handleSubmit(e: React.FormEvent<SignInFormElement>) {
     e.preventDefault();
 
+    setIsLoading(true);
     const data = {
       email: e.currentTarget.elements.email.value,
       password: e.currentTarget.elements.password.value,
@@ -38,7 +43,13 @@ export const SignInForm = () => {
         to: "/dashboard",
       });
     } catch (e) {
-      console.log("err", e);
+      let message = "Algo salió mal";
+      if (e instanceof Error) {
+        message = e.message;
+      }
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -51,6 +62,7 @@ export const SignInForm = () => {
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           placeholder="tu@email.com"
           required
         />
@@ -61,8 +73,14 @@ export const SignInForm = () => {
         </label>
         <PasswordInput type="signIn" />
       </fieldset>
-      <Button type="submit" className="w-full">
-        Continuar
+      <Button disabled={isLoading} type="submit" className="w-full">
+        {isLoading ? (
+          <span>
+            <LoaderCircleIcon className="animate-spin" />
+          </span>
+        ) : (
+          "Continuar"
+        )}
       </Button>
       <p className="text-center">
         No tienes una cuenta ?

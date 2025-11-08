@@ -1,5 +1,5 @@
-import { userStoriesTable } from "../../db/schema/public.js";
+import { userStoriesTable } from "../../db/schema/public.ts";
 
-export type NewUserStory = userStoriesTable.$inferInsert;
+export type NewUserStory = typeof userStoriesTable.$inferInsert;
 
-export type UserStory = userStoriesTable.$inferSelect;
+export type UserStory = typeof userStoriesTable.$inferSelect;

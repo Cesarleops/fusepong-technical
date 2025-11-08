@@ -34,7 +34,6 @@ export async function getUserTickets(req: Request, res: Response) {
 
 export async function joinCompany(req: Request, res: Response) {
   const { id } = req.params;
-  console.log("company id", id);
   try {
     await UserService.joinCompany(req.user.id, id);
     return res.status(201).json({

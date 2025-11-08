@@ -16,8 +16,8 @@ export async function getProjectById(req: Request, res: Response) {
 export async function createProjectUserStory(req: Request, res: Response) {
   const data = req.body;
   try {
-    await ProjectService.createProjectUserStory(data);
-    return res.status(201).send();
+    const result = await ProjectService.createProjectUserStory(data);
+    return res.status(201).json(result.id);
   } catch (e) {
     return res.status(400).json({
       message: "No se pudo crear la historia de usuario",

@@ -37,7 +37,11 @@ export class ProjectRepository {
 
   static async createProjectUserStory(data: NewUserStory) {
     try {
-      await db.insert(userStoriesTable).values(data);
+      const result = await db
+        .insert(userStoriesTable)
+        .values(data)
+        .returning({ id: userStoriesTable.id });
+      return result[0];
     } catch (e) {
       throw e;
     }

@@ -14,7 +14,8 @@ export class ProjectService {
 
   static async createProjectUserStory(data: NewUserStory) {
     try {
-      await ProjectRepository.createProjectUserStory(data);
+      const result = await ProjectRepository.createProjectUserStory(data);
+      return result;
     } catch (e) {
       throw e;
     }

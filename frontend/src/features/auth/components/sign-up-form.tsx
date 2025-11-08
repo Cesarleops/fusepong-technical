@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { SignUpSchema } from "../schemas";
 import { signUp } from "../api/sign-up";
+import { useState } from "react";
+import { toast } from "sonner";
+import { LoaderCircleIcon } from "lucide-react";
 
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -17,8 +20,12 @@ interface SignUpFormElement extends HTMLFormElement {
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleSubmit(e: React.FormEvent<SignUpFormElement>) {
     e.preventDefault();
+
+    setIsLoading(true);
     const data = {
       name: e.currentTarget.elements.name.value,
       email: e.currentTarget.elements.email.value,
@@ -28,6 +35,8 @@ export const SignUpForm = () => {
     const validateFields = SignUpSchema.safeParse(data);
 
     if (!validateFields.success) {
+      setIsLoading(false);
+      toast.error("Por favor verifica tus datos");
       return;
     }
 
@@ -41,7 +50,13 @@ export const SignUpForm = () => {
       });
       navigate({ to: `/dashboard` });
     } catch (e) {
-      console.log("err", e);
+      let message = "Algo salió mal";
+      if (e instanceof Error) {
+        message = e.message;
+      }
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -56,6 +71,7 @@ export const SignUpForm = () => {
           name="name"
           type="text"
           placeholder="Tony stark"
+          autoComplete="name"
           required
         />
       </fieldset>
@@ -67,6 +83,7 @@ export const SignUpForm = () => {
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           placeholder="tu@email.com"
           required
         />
@@ -78,7 +95,13 @@ export const SignUpForm = () => {
         <PasswordInput type="signUp" />
       </fieldset>
       <Button type="submit" className="w-full">
-        Crear cuenta
+        {isLoading ? (
+          <span>
+            <LoaderCircleIcon className="animate-spin" />
+          </span>
+        ) : (
+          "Iniciar sesión"
+        )}
       </Button>
       <p className="text-center">
         Ya tienes una cuenta ?{" "}

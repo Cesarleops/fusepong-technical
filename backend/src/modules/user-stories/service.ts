@@ -1,5 +1,5 @@
+import { NewTicket } from "../tickets/types.js";
 import { UserStoryRepository } from "./repository.js";
-import { NewUserStory } from "./types.js";
 
 export class UserStoryService {
   static async getUserStoryById(storyId: string) {
@@ -10,7 +10,7 @@ export class UserStoryService {
       throw e;
     }
   }
-  static async createUserStoryTicket(data: NewUserStory) {
+  static async createUserStoryTicket(data: NewTicket) {
     try {
       await UserStoryRepository.createUserStoryTicket(data);
     } catch (e) {

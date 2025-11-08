@@ -8,6 +8,7 @@ interface Props {
 }
 export const SignOutButton = ({ className }: Props) => {
   const navigate = useNavigate();
+
   const handleSignOut = async () => {
     try {
       await signOut();

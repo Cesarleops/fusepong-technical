@@ -11,7 +11,10 @@ export const app = express();
 console.log("ENV", process.env.FRONTEND_URL);
 app.use(
   cors({
-    origin: ["https://fusepong-technical.vercel.app", "http://localhost:5173"],
+    origin: [
+      "https://fusepong-technical-frontend.onrender.com",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),

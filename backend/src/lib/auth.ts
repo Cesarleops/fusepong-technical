@@ -10,7 +10,7 @@ export const auth = betterAuth({
     enabled: true,
   },
   trustedOrigins: [
-    "https://fusepong-technical.vercel.app",
+    "https://fusepong-technical-frontend.onrender.com",
     "https://fusepong-technical-backend.onrender.com",
     "http://localhost:5173",
   ],

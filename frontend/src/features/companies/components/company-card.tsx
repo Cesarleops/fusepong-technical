@@ -1,8 +1,8 @@
 import { useNavigate } from "@tanstack/react-router";
-import type { Company } from "../types";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useJoinCompany } from "../api/join-company";
+import type { Company } from "../types";
 
 interface Props {
   company: Company;

@@ -1,4 +1,6 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetCompany } from "@/features/companies/api/get-company";
+import { CompanyCardSkeleton } from "@/features/companies/components/company-card-skeleton";
 import { ProjectCard } from "@/features/projects/components/project-card";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -10,8 +12,21 @@ function RouteComponent() {
   const { companyId } = Route.useParams();
   const { data, error, isLoading } = useGetCompany(companyId);
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <div className="w-full">
+        <header className="mb-8">
+          <Skeleton className="h-3 w-36" />
+          <Skeleton className="h-3 w-36" />
+        </header>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <CompanyCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
   }
+
   if (error) {
     return <>bad bad</>;
   }

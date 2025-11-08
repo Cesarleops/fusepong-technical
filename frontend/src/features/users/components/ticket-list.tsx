@@ -1,10 +1,17 @@
 import { TicketCard } from "@/features/tickets/components/ticket-card";
+import { TicketCardSkeleton } from "@/features/tickets/components/ticket-card-skeleton";
 import { useGetUserTickets } from "@/features/users/api/get-user-tickets";
 
 export const TicketList = () => {
   const { data, error, isLoading } = useGetUserTickets();
   if (isLoading) {
-    return <div>loading...</div>;
+    return (
+      <div className="max-w-3xl mx-auto space-y-4">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <TicketCardSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
   if (error) {
     return <div>something bad happened</div>;

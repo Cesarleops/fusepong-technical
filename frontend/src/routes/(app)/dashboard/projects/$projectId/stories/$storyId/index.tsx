@@ -1,6 +1,8 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetUserStory } from "@/features/stories/api/get-user-story";
 import { CreateTicketForm } from "@/features/tickets/components/create-ticket-form";
 import { TicketCard } from "@/features/tickets/components/ticket-card";
+import { TicketCardSkeleton } from "@/features/tickets/components/ticket-card-skeleton";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
@@ -14,7 +16,19 @@ function RouteComponent() {
   const { data, error, isLoading } = useGetUserStory(storyId);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return (
+      <div className="w-full">
+        <header className="mb-8">
+          <Skeleton className="h-3 w-36" />
+          <Skeleton className="h-3 w-36" />
+        </header>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <TicketCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (error) {

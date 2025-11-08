@@ -40,7 +40,7 @@ export const SignInForm = () => {
         password,
       });
       navigate({
-        to: "/dashboard",
+        to: "/dashboard/home",
       });
     } catch (e) {
       let message = "Algo salió mal";

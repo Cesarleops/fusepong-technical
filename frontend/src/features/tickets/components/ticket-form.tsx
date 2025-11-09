@@ -31,6 +31,7 @@ interface Props {
   isLoadingAction: boolean;
   openForm: boolean;
   setOpen: (v: boolean) => void;
+  reset?: () => void;
   isUpdating: boolean;
   handleSubmit: (e: FormEvent) => void;
   handleInputChange: (
@@ -52,6 +53,7 @@ export const TicketForm = ({
   isLoadingAction,
   openForm,
   setOpen,
+  reset,
   handleInputChange,
   handleStatusChange,
   handleSubmit,
@@ -133,7 +135,16 @@ export const TicketForm = ({
           <DialogFooter className="mt-4">
             <div className="flex items-center justify-between gap-4">
               <DialogClose asChild>
-                <Button type="button" variant="outline">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    if (!isUpdating && reset) {
+                      reset();
+                    }
+                  }}
+                  disabled={isLoadingAction}
+                >
                   Cancelar
                 </Button>
               </DialogClose>

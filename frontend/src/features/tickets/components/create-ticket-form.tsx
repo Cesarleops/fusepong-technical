@@ -31,6 +31,13 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
       };
     });
   };
+
+  const reset = () => {
+    setTicket({
+      name: "",
+      description: "",
+    });
+  };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const ticketData = {
@@ -58,6 +65,7 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
   return (
     <TicketForm
       ticket={ticket}
+      reset={reset}
       isUpdating={false}
       openForm={open}
       isLoadingAction={createTicket.isPending}

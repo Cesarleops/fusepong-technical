@@ -35,9 +35,9 @@ export const TicketList = () => {
           <EmptyMedia variant="icon">
             <TicketsIcon />
           </EmptyMedia>
-          <EmptyTitle>No has sido asignado a ningún ticket</EmptyTitle>
+          <EmptyTitle>No has creado ningún ticket</EmptyTitle>
           <EmptyDescription>
-            Únete a una compañia y a uno de sus proyectos
+            Crea uno en un proyecto de alguna compañia.
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>

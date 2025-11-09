@@ -44,7 +44,7 @@ function RouteComponent() {
         <h3 className="text-xl font-semibold">Proyectos de {data?.name}</h3>
         <p className="text-foreground text-sm">NIT {data?.nit}</p>
       </header>
-      <div className="max-w-3xl mx-auto">
+      <div className="flex flex-col gap-2 max-w-3xl mx-auto">
         {!data || data.projects.length === 0 ? (
           <Empty className="from-muted/50 to-background h-full bg-linear-to-b from-30%">
             <EmptyHeader>

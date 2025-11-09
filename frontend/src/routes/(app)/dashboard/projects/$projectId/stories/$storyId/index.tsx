@@ -1,9 +1,18 @@
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetUserStory } from "@/features/stories/api/get-user-story";
 import { CreateTicketForm } from "@/features/tickets/components/create-ticket-form";
 import { TicketCard } from "@/features/tickets/components/ticket-card";
 import { TicketCardSkeleton } from "@/features/tickets/components/ticket-card-skeleton";
 import { createFileRoute } from "@tanstack/react-router";
+import { TicketsIcon } from "lucide-react";
 
 export const Route = createFileRoute(
   "/(app)/dashboard/projects/$projectId/stories/$storyId/",
@@ -46,9 +55,24 @@ function RouteComponent() {
         <p className="text-foreground">Lista de tickets</p>
       </header>
       <div className="max-w-3xl mx-auto flex flex-col gap-2">
-        {data?.tickets.map((ticket) => (
-          <TicketCard key={ticket.id} ticket={ticket} />
-        ))}
+        {data?.tickets.length === 0 ? (
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <TicketsIcon />
+              </EmptyMedia>
+              <EmptyTitle>Esta historia aún no tiene tickets</EmptyTitle>
+              <EmptyDescription>Puedes crear uno</EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <CreateTicketForm userStoryId={storyId} />
+            </EmptyContent>
+          </Empty>
+        ) : (
+          data?.tickets.map((ticket) => (
+            <TicketCard key={ticket.id} ticket={ticket} />
+          ))
+        )}
       </div>
     </section>
   );

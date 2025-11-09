@@ -1,7 +1,7 @@
 import { API_URL } from "@/config/api";
-import type { CreateTicket } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userStories } from "@/features/stories/query-keys";
+import type { CreateTicket } from "../types";
 
 export const createTicket = async (data: CreateTicket) => {
   const response = await fetch(`${API_URL}/user-stories/tickets`, {

@@ -66,7 +66,7 @@ export const CreateTicketCommentForm = ({ ticketId, userStoryId }: Props) => {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="text-left">
           <DialogTitle>Deja un comentario</DialogTitle>
           <DialogDescription>Comparte alguna idea o aviso</DialogDescription>
         </DialogHeader>

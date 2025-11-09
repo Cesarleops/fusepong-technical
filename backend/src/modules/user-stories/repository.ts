@@ -11,6 +11,7 @@ export class UserStoryRepository {
     try {
       const result = await db.query.userStoriesTable.findMany({
         where: eq(userStoriesTable.id, id),
+        orderBy: (t, { asc }) => asc(t.name),
         with: {
           tickets: {
             with: {

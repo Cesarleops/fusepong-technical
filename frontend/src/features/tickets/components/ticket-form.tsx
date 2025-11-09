@@ -68,7 +68,7 @@ export const TicketForm = ({
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+        <DialogHeader className="text-left">
           <DialogTitle>
             {isUpdating ? "Editar ticket" : "Crear ticket"}
           </DialogTitle>
@@ -131,7 +131,7 @@ export const TicketForm = ({
           </div>
 
           <DialogFooter className="mt-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <DialogClose asChild>
                 <Button type="button" variant="outline">
                   Cancelar

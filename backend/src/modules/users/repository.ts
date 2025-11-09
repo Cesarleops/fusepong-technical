@@ -19,7 +19,9 @@ export class UserRepository {
         .innerJoin(
           projectsTable,
           eq(userProjectsTable.projectId, projectsTable.id),
-        );
+        )
+        .orderBy(projectsTable.name);
+
       return result;
     } catch (e) {
       throw e;
@@ -35,7 +37,9 @@ export class UserRepository {
         .innerJoin(
           companiesTable,
           eq(userCompaniesTable.companyId, companiesTable.id),
-        );
+        )
+        .orderBy(companiesTable.name);
+
       return result;
     } catch (e) {
       throw e;
@@ -54,6 +58,7 @@ export class UserRepository {
       const result = await db.query.ticketsTable.findMany({
         where: (t, { eq, or, inArray }) =>
           or(eq(t.authorId, userId), inArray(t.id, userTickets)),
+        orderBy: (t, { asc }) => asc(t.name),
         with: {
           comments: {
             with: {

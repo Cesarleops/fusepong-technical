@@ -51,7 +51,7 @@ export const TicketCard = ({ ticket }: Props) => {
 
         <p className="text-sm text-gray-600 truncate">{ticket.description}</p>
 
-        <footer className="flex items-center justify-end gap-4 mt-4">
+        <footer className="flex flex-col sm:flex-row items-center justify-end gap-4 mt-4">
           <TicketCommentsList comments={ticket.comments} />
           <CreateTicketCommentForm
             ticketId={ticket.id}

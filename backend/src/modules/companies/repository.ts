@@ -21,7 +21,8 @@ export class CompanyRepository {
       const result = await db
         .select()
         .from(companiesTable)
-        .where(notInArray(companiesTable.id, userCompanyIds));
+        .where(notInArray(companiesTable.id, userCompanyIds))
+        .orderBy(companiesTable.name);
       return result;
     } catch (e) {
       throw e;
@@ -62,7 +63,8 @@ export class CompanyRepository {
       const result = await db
         .select()
         .from(projectsTable)
-        .where(eq(projectsTable.companyId, companyId));
+        .where(eq(projectsTable.companyId, companyId))
+        .orderBy(projectsTable.name);
 
       return result;
     } catch (e) {

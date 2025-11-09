@@ -11,111 +11,28 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, type FormEvent } from "react";
-import { useCreateStory } from "../api/create-user-story";
-import { useCreateTicket } from "@/features/tickets/api/create-ticket";
-import { CreateUserStorySchema } from "../schemas";
-import { toast } from "sonner";
-import { useSession } from "@/lib/auth-client";
-import { CreateTicketSchema } from "@/features/tickets/schemas";
 import { LoaderIcon } from "lucide-react";
-import type { CreateTicket } from "@/features/tickets/types";
+import { useCreateUserStoryForm } from "../hooks/use-create-user-story-form";
 
 interface Props {
   projectId: string;
 }
 
 export const CreateUserStoryForm = ({ projectId }: Props) => {
-  const { data } = useSession();
-
-  const createUserStory = useCreateStory();
-  const createTicket = useCreateTicket();
-
-  const [open, setOpen] = useState(false);
-  const [step, setStep] = useState(1);
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [userStory, setUserStory] = useState({
-    name: "",
-    description: "",
-  });
-
-  const [ticket, setTicket] = useState({
-    name: "",
-    description: "",
-  });
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setIsSubmitting(true);
-
-    const userStoryData = {
-      ...userStory,
-      projectId,
-    };
-
-    const ticketData: Omit<CreateTicket, "userStoryId"> = {
-      ...ticket,
-      authorId: data?.user.id as string,
-    };
-
-    const validateTicketFields = CreateTicketSchema.omit({
-      userStoryId: true,
-    }).safeParse(ticketData);
-
-    if (!validateTicketFields.success) {
-      setIsSubmitting(false);
-      toast.error("Por favor verifica los datos del ticket");
-      return;
-    }
-
-    try {
-      const userStoryId = await createUserStory.mutateAsync(userStoryData);
-      await createTicket.mutateAsync({ ...ticketData, userStoryId });
-      setOpen(false);
-      reset();
-    } catch (e) {
-      let message = "No se pudo crear la historia";
-      if (e instanceof Error) {
-        message = e.message;
-      }
-      toast.error(message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleNextStep = () => {
-    const validateUserStory = CreateUserStorySchema.safeParse({
-      ...userStory,
-      projectId,
-    });
-
-    if (!validateUserStory.success) {
-      toast.error("Por favor verifica los datos de la historia");
-      return;
-    }
-
-    setStep(2);
-  };
-
-  const reset = () => {
-    setUserStory({
-      name: "",
-      description: "",
-    });
-    setTicket({
-      name: "",
-      description: "",
-    });
-    setStep(1);
-  };
-  const handlePrevStep = () => {
-    setStep(1);
-  };
-
+  const {
+    ticket,
+    userStory,
+    open,
+    step,
+    isSubmitting,
+    reset,
+    setOpen,
+    setTicket,
+    setUserStory,
+    handleNextStep,
+    handlePrevStep,
+    handleSubmit,
+  } = useCreateUserStoryForm(projectId);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -156,6 +73,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
                 <Textarea
                   value={userStory.description}
                   id="description"
+                  name="description"
                   onChange={(e) =>
                     setUserStory({ ...userStory, description: e.target.value })
                   }

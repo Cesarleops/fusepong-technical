@@ -81,7 +81,7 @@ export const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarFooter>
-          <SignOutButton className="w-full" />
+          <SignOutButton className="flex justify-start gap-4 w-full" />
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>

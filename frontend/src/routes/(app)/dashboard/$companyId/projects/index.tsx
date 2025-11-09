@@ -36,7 +36,7 @@ function RouteComponent() {
   }
 
   if (error) {
-    return <>bad bad</>;
+    return <div>Algo salio mal obteniendo la compañia</div>;
   }
   return (
     <section className="w-full">

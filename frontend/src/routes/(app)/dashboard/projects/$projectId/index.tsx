@@ -40,7 +40,7 @@ function RouteComponent() {
   }
 
   if (error) {
-    return <div>bad bad bad</div>;
+    return <div>Algo salió mal obteniendo el proyecto</div>;
   }
   return (
     <section>

@@ -25,7 +25,7 @@ export const TicketList = () => {
     );
   }
   if (error) {
-    return <div>something bad happened</div>;
+    return <div>Algo salió mal obteniendo los tickets.</div>;
   }
 
   if (!data || data.length === 0) {

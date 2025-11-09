@@ -41,7 +41,7 @@ function RouteComponent() {
   }
 
   if (error) {
-    return <>badbadbad</>;
+    return <div>Algo salió mal obteniendo la historia de usuario</div>;
   }
   return (
     <section>

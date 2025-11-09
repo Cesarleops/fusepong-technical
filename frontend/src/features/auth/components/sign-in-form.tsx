@@ -47,7 +47,9 @@ export const SignInForm = () => {
       if (e instanceof Error) {
         message = e.message;
       }
-      toast.error(message);
+      toast.error(message, {
+        position: "bottom-center",
+      });
     } finally {
       setIsLoading(false);
     }

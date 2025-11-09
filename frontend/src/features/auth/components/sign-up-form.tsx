@@ -7,6 +7,7 @@ import { signUp } from "../api/sign-up";
 import { useState } from "react";
 import { toast } from "sonner";
 import { LoaderCircleIcon } from "lucide-react";
+import { TOAST_CLASSNAMES } from "@/config/constants";
 
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -36,7 +37,9 @@ export const SignUpForm = () => {
 
     if (!validateFields.success) {
       setIsLoading(false);
-      toast.error("Por favor verifica tus datos");
+      toast.error("Por favor verifica tus datos", {
+        className: TOAST_CLASSNAMES.error,
+      });
       return;
     }
 

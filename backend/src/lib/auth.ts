@@ -6,12 +6,15 @@ import * as schema from "../db/schema/index.js";
 
 //Better auth creates the tables related to sessions and authenticated users
 export const auth = betterAuth({
-  advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
-      domain: ".obito.pro",
-    },
-  },
+  advanced:
+    process.env.NODE_ENV === "production"
+      ? {
+          crossSubDomainCookies: {
+            enabled: true,
+            domain: ".obito.pro",
+          },
+        }
+      : undefined,
   emailAndPassword: {
     enabled: true,
   },

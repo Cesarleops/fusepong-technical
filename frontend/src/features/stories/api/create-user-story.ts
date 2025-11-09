@@ -27,7 +27,6 @@ export function useCreateStory() {
   return useMutation({
     mutationFn: (data: CreateUserStory) => createUserStory(data),
     onSuccess: (_data, variables) => {
-      console.log("mama");
       queryClient.invalidateQueries({
         queryKey: projects.detail(variables.projectId).queryKey,
       });

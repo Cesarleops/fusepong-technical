@@ -16,11 +16,15 @@ export type Ticket = CreateTicket &
   Timestamps & {
     id: string;
     status: "cancelled" | "completed" | "in_progress" | "active";
+    comments: TicketComment[];
   };
 
 export type TicketComment = CreateTicketComment &
   Timestamps & {
     id: string;
+    author: {
+      name: string;
+    };
   };
 
 export type UpdateTicket = z.infer<typeof UpdateTicketSchema> & {

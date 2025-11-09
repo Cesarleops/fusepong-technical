@@ -6,28 +6,14 @@ interface Props {
 
 export const TicketCommentCard = ({ comment }: Props) => {
   return (
-    <article className="rounded-lg border border-border bg-card p-4">
-      <div className="flex items-center gap-3">
-        {
-          //TODO: SHOW INITIALS
-        }
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-card-foreground">
-            {comment.authorId}
-          </p>
-          <p className="text-xs text-muted-foreground">
-            {
-              // TODO: SHOW TIME SINCE COMMENT
-            }
-          </p>
-        </div>
+    <article className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0">
+      <div className="flex w-full items-center gap-2">
+        <span>{comment.author.name}</span>{" "}
+        <span className="ml-auto text-xs">{comment.created_at}</span>
       </div>
-
-      <div className="mt-4">
-        <p className="text-sm leading-6 text-card-foreground">
-          {comment.comment}
-        </p>
-      </div>
+      <span className="line-clamp-2 w-[260px] text-xs whitespace-break-spaces">
+        {comment.comment}
+      </span>
     </article>
   );
 };

@@ -11,5 +11,5 @@ export interface UserCompanies {
 }
 
 export interface UserTickets {
-  tickets: Ticket;
+  ticket: Ticket;
 }

@@ -1,18 +1,19 @@
 import { cn, formatDate } from "@/lib/utils";
-import type { Ticket } from "../types";
 import { UpdateTicketForm } from "./update-ticket-form";
 import { CreateTicketCommentForm } from "./create-ticket-comment-form";
 import { Badge } from "@/components/ui/badge";
+import { TicketCommentsList } from "./ticket-comments-list";
+import type { Ticket } from "../types";
 
 interface Props {
   ticket: Ticket;
 }
 
 const statusMap = {
-  active: "Activo",
-  cancelled: "Cancelado",
-  completed: "Completado",
-  in_progress: "En Proceso",
+  active: "activo",
+  cancelled: "cancelado",
+  completed: "completado",
+  in_progress: "en proceso",
 };
 
 const statusStyles: Record<string, string> = {
@@ -26,17 +27,16 @@ export const TicketCard = ({ ticket }: Props) => {
   return (
     <div className="flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex-1 min-w-0 space-y-1.5">
-        <Badge
-          variant={"outline"}
-          className={cn(
-            "  px-2.5 py-0.5 text-sm font-medium rounded-full",
-            statusStyles[ticket.status],
-          )}
-        >
-          Ticket {statusMap[ticket.status]}
-        </Badge>
-
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <Badge
+            variant={"outline"}
+            className={cn(
+              "  px-2.5 py-0.5 text-sm font-medium rounded-full",
+              statusStyles[ticket.status],
+            )}
+          >
+            Ticket {statusMap[ticket.status]}
+          </Badge>
           <UpdateTicketForm ticket={ticket} />
         </div>
 
@@ -51,7 +51,8 @@ export const TicketCard = ({ ticket }: Props) => {
 
         <p className="text-sm text-gray-600 truncate">{ticket.description}</p>
 
-        <footer className="mt-4">
+        <footer className="flex items-center justify-end gap-4 mt-4">
+          <TicketCommentsList comments={ticket.comments} />
           <CreateTicketCommentForm
             ticketId={ticket.id}
             userStoryId={ticket.userStoryId}

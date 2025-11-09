@@ -2,6 +2,7 @@ import { API_URL } from "@/config/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userStories } from "@/features/stories/query-keys";
 import type { CreateTicketComment } from "../types";
+import { users } from "@/features/users/query-keys";
 
 export const createTicketComment = async (data: CreateTicketComment) => {
   const response = await fetch(`${API_URL}/tickets/comments`, {
@@ -25,6 +26,9 @@ export function useCreateTicketComment(userStoryId: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: userStories.detail(userStoryId).queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: users.listTickets.queryKey,
       });
     },
   });

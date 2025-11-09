@@ -9,27 +9,22 @@ export class UserStoryRepository {
     id: string,
   ): Promise<UserStory & { tickets: Ticket[] }> {
     try {
-      const rows = await db
-        .select()
-        .from(userStoriesTable)
-        .where(eq(userStoriesTable.id, id))
-        .leftJoin(
-          ticketsTable,
-          eq(ticketsTable.userStoryId, userStoriesTable.id),
-        );
+      const result = await db.query.userStoriesTable.findMany({
+        where: eq(userStoriesTable.id, id),
+        with: {
+          tickets: {
+            with: {
+              comments: {
+                with: {
+                  author: true,
+                },
+              },
+            },
+          },
+        },
+      });
 
-      const userStory = rows[0].user_stories;
-
-      const tickets = rows
-        .map((row) => row.tickets)
-        .filter((ticket): ticket is Ticket => ticket !== null);
-
-      const result = {
-        ...userStory,
-        tickets: tickets,
-      };
-
-      return result;
+      return result[0];
     } catch (e) {
       throw e;
     }

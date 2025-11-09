@@ -1,14 +1,15 @@
 import { useJoinProject } from "@/features/companies/api/join-project";
 import type { Project } from "../types";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 
 interface Props {
   project: Project;
+  isCompanyView: boolean;
 }
-export const ProjectCard = ({ project }: Props) => {
+export const ProjectCard = ({ project, isCompanyView }: Props) => {
   const joinProject = useJoinProject();
   const navigate = useNavigate();
   const handleJoinProject = () => {
@@ -35,12 +36,23 @@ export const ProjectCard = ({ project }: Props) => {
         <span className="text-xs text-gray-500">Creado {formattedDate}</span>
       </div>
       <footer className="flex justify-end">
-        <Button
-          disabled={joinProject.isPending}
-          onClick={() => handleJoinProject()}
-        >
-          Unirme
-        </Button>
+        {isCompanyView ? (
+          <Link
+            to="/dashboard/projects/$projectId"
+            params={{
+              projectId: project.id,
+            }}
+          >
+            <Button>Ver tickets</Button>
+          </Link>
+        ) : (
+          <Button
+            disabled={joinProject.isPending}
+            onClick={() => handleJoinProject()}
+          >
+            Unirme
+          </Button>
+        )}
       </footer>
     </div>
   );

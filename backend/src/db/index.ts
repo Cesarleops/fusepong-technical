@@ -1,5 +1,7 @@
 import { drizzle } from "drizzle-orm/neon-http";
+import * as schema from "../db/schema/index.js";
 
 export const db = drizzle(process.env.DATABASE_URL, {
+  schema,
   casing: "snake_case",
 });

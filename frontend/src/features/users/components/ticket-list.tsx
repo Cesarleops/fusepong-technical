@@ -22,8 +22,8 @@ export const TicketList = () => {
   }
   return (
     <div className="flex flex-col max-w-4xl mx-auto ">
-      {data?.map(({ tickets }) => (
-        <TicketCard key={tickets.id} ticket={tickets} />
+      {data?.map(({ ticket }) => (
+        <TicketCard key={ticket.id} ticket={ticket} />
       ))}
     </div>
   );

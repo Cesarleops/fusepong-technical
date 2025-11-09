@@ -6,7 +6,6 @@ import {
   ticketAssignees,
   projectsTable,
   companiesTable,
-  ticketsTable,
 } from "../../db/schema/public.js";
 import { AppDatabaseError } from "../../lib/errors.js";
 
@@ -45,11 +44,22 @@ export class UserRepository {
 
   static async findTickets(userId: string) {
     try {
-      const result = await db
-        .select()
-        .from(ticketAssignees)
-        .where(eq(ticketAssignees.userId, userId))
-        .innerJoin(ticketsTable, eq(ticketAssignees.ticketId, ticketsTable.id));
+      const result = await db.query.ticketAssignees.findMany({
+        columns: {},
+        where: eq(ticketAssignees.userId, userId),
+        with: {
+          ticket: {
+            with: {
+              comments: {
+                with: {
+                  author: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
       return result;
     } catch (e) {
       throw e;

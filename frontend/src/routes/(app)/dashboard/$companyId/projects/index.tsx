@@ -38,7 +38,11 @@ function RouteComponent() {
       </header>
       <div className="max-w-3xl mx-auto">
         {data?.projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            isCompanyView={true}
+          />
         ))}
       </div>
     </section>

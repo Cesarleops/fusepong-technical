@@ -6,6 +6,7 @@ import {
   text,
   unique,
 } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { users } from "./auth.js";
 import { timestamps } from "./columns.helpers.js";
 
@@ -141,3 +142,44 @@ export const ticketComments = pgTable("ticket_comments", {
   comment: varchar({ length: 255 }).notNull(),
   ...timestamps,
 });
+
+export const userStoriesRelations = relations(userStoriesTable, ({ many }) => ({
+  tickets: many(ticketsTable),
+}));
+export const ticketAssigneesRelations = relations(
+  ticketAssignees,
+  ({ one }) => ({
+    ticket: one(ticketsTable, {
+      fields: [ticketAssignees.ticketId],
+      references: [ticketsTable.id],
+    }),
+    user: one(users, {
+      fields: [ticketAssignees.userId],
+      references: [users.id],
+    }),
+  }),
+);
+
+export const ticketsRelations = relations(ticketsTable, ({ many, one }) => ({
+  comments: many(ticketComments),
+  assignees: many(ticketAssignees),
+  userStory: one(userStoriesTable, {
+    fields: [ticketsTable.userStoryId],
+    references: [userStoriesTable.id],
+  }),
+  author: one(users, {
+    fields: [ticketsTable.authorId],
+    references: [users.id],
+  }),
+}));
+
+export const ticketCommentsRelations = relations(ticketComments, ({ one }) => ({
+  ticket: one(ticketsTable, {
+    fields: [ticketComments.ticketId],
+    references: [ticketsTable.id],
+  }),
+  author: one(users, {
+    fields: [ticketComments.authorId],
+    references: [users.id],
+  }),
+}));

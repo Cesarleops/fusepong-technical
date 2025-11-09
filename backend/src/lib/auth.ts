@@ -6,6 +6,12 @@ import * as schema from "../db/schema/index.js";
 
 //Better auth creates the tables related to sessions and authenticated users
 export const auth = betterAuth({
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: ".onrender.com",
+    },
+  },
   emailAndPassword: {
     enabled: true,
   },
@@ -19,10 +25,4 @@ export const auth = betterAuth({
     schema,
     usePlural: true,
   }),
-  advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
-      domain: ".onrender.com",
-    },
-  },
 });

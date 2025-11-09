@@ -8,7 +8,6 @@ const BASE_ROUTE = "/api";
 
 export const app = express();
 
-console.log("ENV", process.env.FRONTEND_URL);
 app.use(
   cors({
     origin: [

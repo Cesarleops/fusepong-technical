@@ -21,7 +21,7 @@ export const CompanyList = () => {
     return <div>Parece que aún no hay compañias</div>;
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {data?.map((company) => (
         <CompanyCard key={company.id} company={company} />
       ))}

@@ -32,24 +32,30 @@ export const NavCompanies = ({ location }: Props) => {
 
   return (
     <SidebarMenu>
-      {data.map(({ companies }) => (
-        <SidebarMenuItem key={companies.name}>
-          <SidebarMenuButton
-            className={cn("font-medium", {
-              "text-primary":
-                location === `/dashboard/${companies.id}/projects`,
-            })}
-            asChild
-          >
-            <Link
-              to="/dashboard/$companyId/projects"
-              params={{ companyId: companies.id }}
+      {data.length === 0 ? (
+        <Link to="/dashboard/companies">
+          <SidebarMenuItem>Unete a una compañia</SidebarMenuItem>
+        </Link>
+      ) : (
+        data.map(({ companies }) => (
+          <SidebarMenuItem key={companies.name}>
+            <SidebarMenuButton
+              className={cn("font-medium", {
+                "text-primary":
+                  location === `/dashboard/${companies.id}/projects`,
+              })}
+              asChild
             >
-              <span>{companies.name}</span>
-            </Link>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      ))}
+              <Link
+                to="/dashboard/$companyId/projects"
+                params={{ companyId: companies.id }}
+              >
+                <span>{companies.name}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))
+      )}
     </SidebarMenu>
   );
 };

@@ -32,25 +32,32 @@ export const NavProjects = ({ location }: Props) => {
 
   return (
     <SidebarMenu>
-      {data.map(({ projects }) => (
-        <SidebarMenuItem key={projects.name}>
-          <SidebarMenuButton
-            className={cn("font-medium", {
-              "text-primary": location === `/dashboard/projects/${projects.id}`,
-            })}
-            asChild
-          >
-            <Link
-              to={`/dashboard/projects/$projectId`}
-              params={{
-                projectId: projects.id,
-              }}
-            >
-              <span>{projects.name}</span>
-            </Link>
-          </SidebarMenuButton>
+      {data.length === 0 ? (
+        <SidebarMenuItem className="text-xs">
+          No estás en ningún proyecto
         </SidebarMenuItem>
-      ))}
+      ) : (
+        data.map(({ projects }) => (
+          <SidebarMenuItem key={projects.name}>
+            <SidebarMenuButton
+              className={cn("font-medium", {
+                "text-primary":
+                  location === `/dashboard/projects/${projects.id}`,
+              })}
+              asChild
+            >
+              <Link
+                to={`/dashboard/projects/$projectId`}
+                params={{
+                  projectId: projects.id,
+                }}
+              >
+                <span>{projects.name}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))
+      )}
     </SidebarMenu>
   );
 };

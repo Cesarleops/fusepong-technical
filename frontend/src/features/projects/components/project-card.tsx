@@ -43,7 +43,7 @@ export const ProjectCard = ({ project, isCompanyView }: Props) => {
               projectId: project.id,
             }}
           >
-            <Button>Ver tickets</Button>
+            <Button>Ver historias</Button>
           </Link>
         ) : (
           <Button

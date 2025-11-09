@@ -30,7 +30,7 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <SidebarProvider>
           <RouterProvider router={router} />
-          <Toaster />
+          <Toaster richColors />
         </SidebarProvider>
       </QueryClientProvider>
     </StrictMode>,

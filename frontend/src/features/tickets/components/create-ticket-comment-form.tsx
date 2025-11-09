@@ -1,9 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateTicketComment } from "../api/create-ticket-comment";
-import { useSession } from "@/lib/auth-client";
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { CreateTicketCommentSchema } from "../schemas";
 import {
   Dialog,
   DialogContent,
@@ -13,50 +9,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { LoaderIcon, MessageSquareMoreIcon } from "lucide-react";
-import { toast } from "sonner";
+import { useCreateTicketCommentForm } from "../hooks/use-create-ticket-comment-form";
 
 interface Props {
   ticketId: string;
   userStoryId: string;
 }
 export const CreateTicketCommentForm = ({ ticketId, userStoryId }: Props) => {
-  const { data } = useSession();
-
-  const createComment = useCreateTicketComment(userStoryId);
-
-  const [comment, setComment] = useState("");
-
-  const [open, setOpen] = useState(false);
-
-  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const ticketData = {
-      ticketId,
-      authorId: data?.user.id as string,
-      comment,
-    };
-    const validateFields = CreateTicketCommentSchema.safeParse(ticketData);
-    if (!validateFields.success) {
-      toast.error("Por favor añade un comentario");
-      return;
-    }
-
-    createComment.mutate(ticketData, {
-      onSuccess: () => {
-        toast.success("Tu comentario fue añadido!");
-        setComment("");
-        setOpen(false);
-      },
-      onError: () => {
-        toast.error("No pudimos agregar tu comentario, intenta más tarde.");
-      },
-    });
-  };
-
+  const {
+    open,
+    comment,
+    isSubmitting,
+    handleCommentChange,
+    handleSubmit,
+    setOpen,
+  } = useCreateTicketCommentForm(userStoryId, ticketId);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -81,8 +48,11 @@ export const CreateTicketCommentForm = ({ ticketId, userStoryId }: Props) => {
             {comment.length}/255
           </p>
           <footer className="flex justify-end">
-            <Button disabled={comment.length === 0 || createComment.isPending}>
-              {createComment.isPending ? (
+            <Button
+              className="w-22"
+              disabled={comment.length === 0 || isSubmitting}
+            >
+              {isSubmitting ? (
                 <span>
                   <LoaderIcon className="animate-spin" />
                 </span>

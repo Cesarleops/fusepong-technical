@@ -26,17 +26,15 @@ export const UserStoryCard = ({ userStory }: Props) => {
         </span>
       </div>
       <footer className="flex justify-end">
-        <Button>
-          <Link
-            to={`/dashboard/projects/$projectId/stories/$storyId`}
-            params={{
-              projectId: userStory.projectId,
-              storyId: userStory.id,
-            }}
-          >
-            Ver historia
-          </Link>
-        </Button>
+        <Link
+          to={`/dashboard/projects/$projectId/stories/$storyId`}
+          params={{
+            projectId: userStory.projectId,
+            storyId: userStory.id,
+          }}
+        >
+          <Button>Ver historia</Button>
+        </Link>
       </footer>
     </div>
   );

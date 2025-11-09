@@ -9,15 +9,15 @@ export const auth = betterAuth({
   advanced: {
     crossSubDomainCookies: {
       enabled: true,
-      domain: ".onrender.com",
+      domain: ".obito.pro",
     },
   },
   emailAndPassword: {
     enabled: true,
   },
   trustedOrigins: [
-    "https://fusepong-technical-frontend.onrender.com",
-    "https://fusepong-technical-backend.onrender.com",
+    "https://app.obito.pro",
+    "https://api.obito.pro",
     "http://localhost:5173",
   ],
   database: drizzleAdapter(db, {

@@ -10,10 +10,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://fusepong-technical-frontend.onrender.com",
-      "http://localhost:5173",
-    ],
+    origin: ["https://app.obito.pro", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),

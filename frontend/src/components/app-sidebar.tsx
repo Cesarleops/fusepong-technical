@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { SignOutButton } from "@/features/auth/components/sign-out-button";
 import { NavCompanies } from "@/features/users/components/nav-companies";
 import { NavProjects } from "@/features/users/components/nav-projects";
 import { UserBadgeMenu } from "@/features/users/components/user-badge-menu";
@@ -78,6 +80,9 @@ export const AppSidebar = () => {
             <NavProjects location={location.pathname} />
           </SidebarGroupContent>
         </SidebarGroup>
+        <SidebarFooter>
+          <SignOutButton className="w-full" />
+        </SidebarFooter>
       </SidebarContent>
     </Sidebar>
   );

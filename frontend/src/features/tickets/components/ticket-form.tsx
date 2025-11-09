@@ -131,22 +131,24 @@ export const TicketForm = ({
           </div>
 
           <DialogFooter className="mt-4">
-            <DialogClose asChild>
-              <Button type="button" variant="outline">
-                Cancelar
+            <div className="flex items-center justify-between">
+              <DialogClose asChild>
+                <Button type="button" variant="outline">
+                  Cancelar
+                </Button>
+              </DialogClose>
+              <Button type="submit" className="w-20" disabled={isLoadingAction}>
+                {isLoadingAction ? (
+                  <span>
+                    <LoaderIcon className="animate-spin" />
+                  </span>
+                ) : isUpdating ? (
+                  "Confirmar"
+                ) : (
+                  "Crear"
+                )}
               </Button>
-            </DialogClose>
-            <Button type="submit" className="w-20" disabled={isLoadingAction}>
-              {isLoadingAction ? (
-                <span>
-                  <LoaderIcon className="animate-spin" />
-                </span>
-              ) : isUpdating ? (
-                "Confirmar"
-              ) : (
-                "Crear"
-              )}
-            </Button>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>

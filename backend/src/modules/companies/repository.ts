@@ -1,13 +1,27 @@
-import { eq } from "drizzle-orm";
+import { eq, notInArray } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { companiesTable, projectsTable } from "../../db/schema/public.js";
+import {
+  companiesTable,
+  projectsTable,
+  userCompaniesTable,
+} from "../../db/schema/public.js";
 import { NewProject, Project } from "../projects/types.js";
 import { Company, NewCompany } from "./types.js";
 
 export class CompanyRepository {
-  static async findAll(): Promise<Company[]> {
+  static async findAll(userId: string): Promise<Company[]> {
     try {
-      const result = await db.select().from(companiesTable);
+      const query = await db
+        .select()
+        .from(userCompaniesTable)
+        .where(eq(userCompaniesTable.userId, userId));
+
+      const userCompanyIds = query.map((uc) => uc.companyId);
+
+      const result = await db
+        .select()
+        .from(companiesTable)
+        .where(notInArray(companiesTable.id, userCompanyIds));
       return result;
     } catch (e) {
       throw e;

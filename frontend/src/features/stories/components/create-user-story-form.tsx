@@ -110,7 +110,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
         <Button size={"sm"}>Crear historia</Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="text-left">
           <DialogTitle>Crear historia de usuario</DialogTitle>
           <DialogDescription>
             Una historia describe una tarea de un proyecto

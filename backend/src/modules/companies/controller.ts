@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { CompanyService } from "./service.js";
 
-export async function getCompanies(_req: Request, res: Response) {
+export async function getCompanies(req: Request, res: Response) {
   try {
-    const companies = await CompanyService.getAllCompanies();
+    const userId = req.user.id;
+    const companies = await CompanyService.getAllCompanies(userId);
     return res.status(200).json(companies);
   } catch (e) {
     return res.status(500).json({

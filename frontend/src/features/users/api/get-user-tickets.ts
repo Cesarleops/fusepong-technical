@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { users } from "../query-keys";
 import { API_URL } from "@/config/api";
-import type { UserTickets } from "../types";
+import type { Ticket } from "@/features/tickets/types";
 
-export const getUserTickets = async (): Promise<UserTickets[]> => {
+export const getUserTickets = async (): Promise<Ticket[]> => {
   const response = await fetch(`${API_URL}/user/tickets`, {
     credentials: "include",
   });

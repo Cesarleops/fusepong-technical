@@ -3,9 +3,9 @@ import { db } from "../../db/index.js";
 import {
   userCompaniesTable,
   userProjectsTable,
-  ticketAssignees,
   projectsTable,
   companiesTable,
+  ticketAssignees,
 } from "../../db/schema/public.js";
 import { AppDatabaseError } from "../../lib/errors.js";
 
@@ -44,17 +44,20 @@ export class UserRepository {
 
   static async findTickets(userId: string) {
     try {
-      const result = await db.query.ticketAssignees.findMany({
-        columns: {},
-        where: eq(ticketAssignees.userId, userId),
+      const query = await db
+        .select()
+        .from(ticketAssignees)
+        .where(eq(ticketAssignees.userId, userId));
+
+      const userTickets = query.map((uc) => uc.ticketId);
+
+      const result = await db.query.ticketsTable.findMany({
+        where: (t, { eq, or, inArray }) =>
+          or(eq(t.authorId, userId), inArray(t.id, userTickets)),
         with: {
-          ticket: {
+          comments: {
             with: {
-              comments: {
-                with: {
-                  author: true,
-                },
-              },
+              author: true,
             },
           },
         },

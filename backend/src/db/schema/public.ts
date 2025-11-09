@@ -146,19 +146,6 @@ export const ticketComments = pgTable("ticket_comments", {
 export const userStoriesRelations = relations(userStoriesTable, ({ many }) => ({
   tickets: many(ticketsTable),
 }));
-export const ticketAssigneesRelations = relations(
-  ticketAssignees,
-  ({ one }) => ({
-    ticket: one(ticketsTable, {
-      fields: [ticketAssignees.ticketId],
-      references: [ticketsTable.id],
-    }),
-    user: one(users, {
-      fields: [ticketAssignees.userId],
-      references: [users.id],
-    }),
-  }),
-);
 
 export const ticketsRelations = relations(ticketsTable, ({ many, one }) => ({
   comments: many(ticketComments),
@@ -183,3 +170,17 @@ export const ticketCommentsRelations = relations(ticketComments, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const ticketAssigneesRelations = relations(
+  ticketAssignees,
+  ({ one }) => ({
+    ticket: one(ticketsTable, {
+      fields: [ticketAssignees.ticketId],
+      references: [ticketsTable.id],
+    }),
+    user: one(users, {
+      fields: [ticketAssignees.userId],
+      references: [users.id],
+    }),
+  }),
+);

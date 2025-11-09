@@ -3,9 +3,9 @@ import { CompanyRepository } from "./repository.js";
 import { NewCompany } from "./types.js";
 
 export class CompanyService {
-  static async getAllCompanies() {
+  static async getAllCompanies(userId: string) {
     try {
-      const companies = await CompanyRepository.findAll();
+      const companies = await CompanyRepository.findAll(userId);
       return companies;
     } catch (e) {
       throw e;

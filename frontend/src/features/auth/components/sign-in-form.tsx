@@ -39,7 +39,7 @@ export const SignInForm = () => {
         email,
         password,
       });
-      navigate({
+      await navigate({
         to: "/dashboard/home",
       });
     } catch (e) {

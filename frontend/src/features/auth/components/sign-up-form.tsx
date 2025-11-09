@@ -48,7 +48,7 @@ export const SignUpForm = () => {
         password,
         name,
       });
-      navigate({ to: `/dashboard/home` });
+      await navigate({ to: `/dashboard/home` });
     } catch (e) {
       let message = "Algo salió mal";
       if (e instanceof Error) {

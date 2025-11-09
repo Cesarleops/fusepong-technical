@@ -46,7 +46,7 @@ function RouteComponent() {
     <section>
       <header className="mb-8">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold">{data?.name}</h3>
+          <h3 className="text-xl font-semibold">Proyecto {data?.name}</h3>
           <CreateUserStoryForm projectId={projectId} />
         </div>
         <p className="text-foreground">Historias de usuario</p>

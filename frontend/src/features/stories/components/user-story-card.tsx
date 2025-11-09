@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { formatDate } from "@/lib/utils";
 import type { UserStory } from "../types";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   userStory: UserStory;
@@ -11,6 +12,8 @@ export const UserStoryCard = ({ userStory }: Props) => {
   const formattedDate = formatDate(userStory.created_at);
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:bg-gray-50">
+      <Badge className="mb-2">Historia </Badge>
+
       <div className="flex-1 min-w-0">
         <h3 className="font-semibold text-gray-900 truncate">
           {userStory.name}

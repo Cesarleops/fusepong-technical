@@ -94,7 +94,7 @@ export const SignUpForm = () => {
         </label>
         <PasswordInput type="signUp" />
       </fieldset>
-      <Button type="submit" className="w-full">
+      <Button disabled={isLoading} type="submit" className="w-full">
         {isLoading ? (
           <span>
             <LoaderCircleIcon className="animate-spin" />

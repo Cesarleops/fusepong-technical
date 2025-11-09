@@ -75,6 +75,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
       const userStoryId = await createUserStory.mutateAsync(userStoryData);
       await createTicket.mutateAsync({ ...ticketData, userStoryId });
       setOpen(false);
+      reset();
     } catch (e) {
       let message = "No se pudo crear la historia";
       if (e instanceof Error) {
@@ -100,6 +101,17 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
     setStep(2);
   };
 
+  const reset = () => {
+    setUserStory({
+      name: "",
+      description: "",
+    });
+    setTicket({
+      name: "",
+      description: "",
+    });
+    setStep(1);
+  };
   const handlePrevStep = () => {
     setStep(1);
   };
@@ -191,7 +203,12 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
             <div className="w-full flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <DialogClose asChild>
-                  <Button type="button" variant={"secondary"}>
+                  <Button
+                    type="button"
+                    onClick={() => reset()}
+                    disabled={isSubmitting}
+                    variant={"secondary"}
+                  >
                     Cancelar
                   </Button>
                 </DialogClose>
@@ -199,6 +216,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
                   <Button
                     type="button"
                     variant={"outline"}
+                    disabled={isSubmitting}
                     onClick={() => handlePrevStep()}
                   >
                     Volver
@@ -213,6 +231,7 @@ export const CreateUserStoryForm = ({ projectId }: Props) => {
               ) : (
                 <Button
                   disabled={isSubmitting}
+                  className="w-22"
                   onClick={handleSubmit}
                   type="button"
                 >

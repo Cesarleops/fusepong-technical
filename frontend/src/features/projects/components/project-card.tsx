@@ -4,6 +4,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   project: Project;
@@ -27,6 +28,7 @@ export const ProjectCard = ({ project, isCompanyView }: Props) => {
   const formattedDate = formatDate(project.created_at);
   return (
     <div className=" rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:bg-gray-50">
+      <Badge className="mb-2">Proyecto</Badge>
       <div className="flex-1 min-w-0">
         <h3 className="font-semibold text-gray-900 truncate">{project.name}</h3>
         <p className="text-sm text-gray-600 truncate">{project.description}</p>

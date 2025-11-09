@@ -40,7 +40,7 @@ export const CreateTicketForm = ({ userStoryId }: Props) => {
     };
     const validateFields = CreateTicketSchema.safeParse(ticketData);
     if (!validateFields.success) {
-      toast.error("algo salio mal creando tu ticket");
+      toast.error("El nombre no puede estar vacio");
       return;
     }
 

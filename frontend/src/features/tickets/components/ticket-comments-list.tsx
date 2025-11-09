@@ -7,9 +7,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { MessageSquareIcon } from "lucide-react";
-import type { TicketComment } from "../types";
+import { BrushCleaningIcon, MessageSquareIcon } from "lucide-react";
 import { TicketCommentCard } from "./comment-card";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+
+import type { TicketComment } from "../types";
 
 interface Props {
   comments: TicketComment[];
@@ -29,9 +36,20 @@ export const TicketCommentsList = ({ comments }: Props) => {
           <SheetDescription>{comments.length} Comentarios</SheetDescription>
         </SheetHeader>
         <div className="space-y-4 overflow-y-auto ">
-          {comments.map((comment) => (
-            <TicketCommentCard key={comment.id} comment={comment} />
-          ))}
+          {comments.length === 0 ? (
+            <Empty className="from-muted/50 to-background h-full bg-linear-to-b from-30%">
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <BrushCleaningIcon />
+                </EmptyMedia>
+                <EmptyTitle>Aún no hay comentarios!</EmptyTitle>
+              </EmptyHeader>
+            </Empty>
+          ) : (
+            comments.map((comment) => (
+              <TicketCommentCard key={comment.id} comment={comment} />
+            ))
+          )}
         </div>
       </SheetContent>
     </Sheet>

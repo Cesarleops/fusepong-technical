@@ -3,6 +3,16 @@ import { useGetProject } from "@/features/projects/api/get-project";
 import { CreateUserStoryForm } from "@/features/stories/components/create-user-story-form";
 import { UserStoryCardSkeleton } from "@/features/stories/components/story-card-skeleton";
 import { UserStoryList } from "@/features/stories/components/user-story-list";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { BookIcon } from "lucide-react";
+
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(app)/dashboard/projects/$projectId/")({
@@ -41,7 +51,22 @@ function RouteComponent() {
         </div>
         <p className="text-foreground">Historias de usuario</p>
       </header>
-      <UserStoryList userStories={data?.userStories || []} />
+      {data?.userStories.length === 0 ? (
+        <Empty className="from-muted/50 to-background h-full bg-linear-to-b from-30%">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <BookIcon />
+            </EmptyMedia>
+            <EmptyTitle>Este proyecto aún no tiene historias</EmptyTitle>
+            <EmptyDescription>Puedes crear una</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <CreateUserStoryForm projectId={projectId} />
+          </EmptyContent>
+        </Empty>
+      ) : (
+        <UserStoryList userStories={data?.userStories || []} />
+      )}
     </section>
   );
 }

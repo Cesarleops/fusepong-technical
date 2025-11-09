@@ -101,7 +101,7 @@ export const TicketForm = ({
               </Select>
             </div>
           )}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <label htmlFor="name" className="font-medium text-right">
               Ticket
             </label>
@@ -114,9 +114,12 @@ export const TicketForm = ({
               autoComplete="off"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-3">
             <label htmlFor="description" className="font-medium text-right">
-              Descripción
+              Descripción{" "}
+              <span className="text-muted-foreground text-xs ml-2">
+                Opcional
+              </span>
             </label>
             <Textarea
               id="description"
